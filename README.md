@@ -1,10 +1,10 @@
 # [Name of the Project] : [Team Number]
 # Members
-Project Manager: [Name] ([GitHub Name])\
-Communications Lead: [Name] ([GitHub Name])\
-Git Master: [Name] ([GitHub Name])\
-Design Lead: [Name] ([GitHub Name])\
-Quality Assurance Tester: [Name] ([GitHub Name])
+Project Manager: Triston Blue ([GitHub Name])\
+Communications Lead: Taliyah Applewhite ([taliyahjulia])\
+Git Master: Pape Diagne (pape-stem-lsu)\
+Design Lead: Krishna Conerly (KrishnaV193)\
+Quality Assurance Tester: [Marie OConnell] (moconnell556)\
 
 # About Our Software
 
