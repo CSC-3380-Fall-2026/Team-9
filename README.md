@@ -1,4 +1,4 @@
-# [Name of the Project] : [Team Number]
+# [Name of the Project] : Team 9 
 # Members
 Project Manager: Triston Blue ([GitHub Name])\
 Communications Lead: Taliyah Applewhite ([taliyahjulia])\
@@ -8,13 +8,10 @@ Quality Assurance Tester: [Marie OConnell] (moconnell556)\
 
 # About Our Software
 
-Describe a little about what the project is about here.
+An interactive website that focuses on both the technical and social factors behind cyber attacks. Users will encounter simulated cyber threats such as phishing emails, suspicious messages, fake log in pages, and impersonation attempts. What sets this apart from other cybersecurity training sites, is the focus on social factors that can influence decisions. After each scenario, users will receive feedback detailing the technical warning signs as well as the human factors used in the attack.
+
 ## Platforms Tested on
-- MacOS
-- Android
-- iOS
-- Linux
-- Windows
+- TBD
 # Important Links
 Kanban Board: [link]\
 Designs: [link]\
@@ -23,10 +20,9 @@ Styles Guide(s): [link]
 # How to Run Dev and Test Environment
 
 ## Dependencies
-- List all dependencies here
-- Don't forget to include versions
+-n/a 
 ### Downloading Dependencies
-Describe where to download the dependencies here. Some will likely require a web download. Provide links here. For IDE extensions, make sure your project works with the free version of them, and detail which IDE(s) these are available in. 
+n/a
 
 ## Commands
 Describe how the commands and process to launch the project on the main branch in such a way that anyone working on the project knows how to check the affects of any code they add.
