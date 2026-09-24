@@ -1,6 +1,6 @@
 # [Name of the Project] : Team 9 
 # Members
-Project Manager: Triston Blue ([GitHub Name])\
+Project Manager: Triston Blue (thxRealBLue)\
 Communications Lead: Taliyah Applewhite ([taliyahjulia])\
 Git Master: Pape Diagne (pape-stem-lsu)\
 Design Lead: Krishna Conerly (KrishnaV193)\
