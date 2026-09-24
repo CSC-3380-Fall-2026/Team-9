@@ -4,7 +4,7 @@ Project Manager: Triston Blue ([GitHub Name])\
 Communications Lead: Taliyah Applewhite ([taliyahjulia])\
 Git Master: Pape Diagne (pape-stem-lsu)\
 Design Lead: Krishna Conerly (KrishnaV193)\
-Quality Assurance Tester: [Marie OConnell] (moconnell556)\
+Quality Assurance Tester: Marie OConnell (moconnell556)
 
 # About Our Software
 
