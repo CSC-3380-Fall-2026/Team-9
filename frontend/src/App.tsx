@@ -1,4 +1,38 @@
+/*
+  CyberSense Landing / Login Page
+
+  Okay so umm this page is based on the CyberSense interface designed in we did in Figma.
+  Figma Make was used to generate an initial React implementation of
+  the design(although with a few modifications cuz figma played but we still need to go in and add clikable
+  tabs and i also think we should update some of the info i changed the about us in this section but honetly those can be separate tasks)
+  , which was then integrated into the team's existing
+  React + TypeScript + Vite frontend.
+  oh i also installed tailwind(it was some bs sooo umm yeah) 
+  so yall might need to as well it was the only way to intergrate it properly
+  
+
+  Right now this page currently includes: 
+  CyberSense navigation/header
+  Login form
+  About CyberSense section
+  Platform area cards(cant click on these need to add code for this)
+  Responsive layout
+  Figma-designed background and SVG assets
+
+  The login form is currently frontend-only.so its absolutely useless lol but thats fine for now.
+  Backend authentication and database functionality will be added later.
+  teehee.
+*/
+
+
+
+
 const assetPathPrefix = "/assets"
+
+
+
+
+// This the main area of CyberSense platform that is shown on the landing page.
 
 const platformAreas = [
   {
@@ -52,9 +86,7 @@ export default function App() {
             Human-Centered Cybersecurity Training
           </p>
           <p className="font-['Inter:Regular'] text-base leading-6 font-normal">
-            Learn how to recognize cybersecurity threats by understanding both
-            the technical warning signs and the human factors that make attacks
-            feel trustworthy.
+           Learn how attackers use both technical tricks and human behavior to manipulate users, and how to recognize the warning signs before responding.
           </p>
         </div>
       </section>
@@ -71,7 +103,7 @@ export default function App() {
               </h2>
 
               <label className="flex w-full flex-col gap-2 font-['Inter:Semi_Bold'] text-sm leading-normal font-semibold text-[#00ffc8]">
-                Email or username
+                Email or Username
                 <input
                   autoComplete="username"
                   className="h-12 w-full rounded-[3px] border border-white bg-[rgba(7,26,44,0.75)] p-[14px] font-['Inter:Regular'] text-sm font-normal text-[#00ffc8] outline-none placeholder:text-[rgba(0,200,160,0.5)] focus:border-[#00ffc8]"
@@ -126,9 +158,8 @@ export default function App() {
                 About CyberSense
               </h2>
               <p className="font-['Inter:Regular'] text-base leading-6 font-normal">
-                Users complete realistic cybersecurity scenarios, receive
-                technical and human-factor feedback, and track their progress
-                over time.
+               CyberSense is an interactive cybersecurtity awareness platform focused on both technical threats and the human factors behind social engineering. Users work through realsitic scenarios involving phishing, impersonation, urgency, authority,
+               suspicious links, credential requests, and other manipulation techniques.After each scenario, CyberSense explains the warning signs, identifies the human and technical cues involved, and helps users track patterns in their performance over time.
               </p>
             </article>
 
