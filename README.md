@@ -20,7 +20,12 @@ Styles Guide(s): [link]
 # How to Run Dev and Test Environment
 
 ## Dependencies
--n/a 
+- Node.js
+- npm
+- React
+- TypeScript
+- Vite
+- Tailwind CSS 
 ### Downloading Dependencies
 n/a
 
