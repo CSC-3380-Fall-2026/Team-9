@@ -1,0 +1,33 @@
+{
+  "type": "phishing_email",
+  "title": "Urgent: Your Account Will Be Suspended",
+  "message": "From: security@yourbank-support.com\nSubject: URGENT - Account Suspension Notice\n\nDear Customer,\n\nWe detected unusual activity on your account. Click the link below within 24 hours to verify your identity or your account will be permanently suspended.\n\n[Verify My Account Now]\n\nThank you,\nSecurity Team",
+  "choices": [
+    {
+      "text": "Click the link and enter your login details to verify your account.",
+      "safe": false,
+      "feedback": "This is exactly what the attacker wants. Legitimate banks never ask you to verify your identity through an urgent email link."
+    },
+    {
+      "text": "Delete the email and log into your bank account directly through the official app or website to check for issues.",
+      "safe": true,
+      "feedback": "Correct. Going directly to the official site/app instead of clicking email links avoids phishing links entirely."
+    },
+    {
+      "text": "Reply to the email asking for more information.",
+      "safe": false,
+      "feedback": "Replying confirms your email address is active and monitored, which attackers can use for future targeting."
+    }
+  ],
+  "warningSigns": [
+    "Urgent, threatening language with a short deadline",
+    "Generic greeting ('Dear Customer') instead of your name",
+    "Sender domain doesn't match the real bank's domain",
+    "Link text doesn't show the actual destination URL"
+  ],
+  "humanFactors": [
+    "Urgency",
+    "Fear of loss",
+    "Authority (appears to be from the bank)"
+  ]
+}
