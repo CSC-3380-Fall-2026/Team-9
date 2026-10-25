@@ -13,7 +13,7 @@ An interactive website that focuses on both the technical and social factors beh
 ## Platforms Tested on
 - TBD
 # Important Links
-Kanban Board: [link]\
+Kanban Board: https://claude.ai/artifact/Td3VYJVZisfhmmqjaTzmMr\              
 Designs: [link]\
 Styles Guide(s): [link]
 
