@@ -17,11 +17,9 @@
 */
 
 
-
-
-import { useState } from 'react';
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import type { Scenario } from '../types/scenario'
-import { useNavigate } from 'react-router-dom'; 
 
 interface ScenarioPageProps {
   scenario: Scenario;
@@ -74,25 +72,26 @@ export default function ScenarioPage({ scenario, onBack, activeNav = 'Training' 
           <span className="font-bold text-[#202020] text-base leading-none">CyberSense</span>
         </div>
         <div className="flex items-center gap-2">
-          {NAV_ITEMS.map((item) => {
-            const active = item === activeNav;
-            return (
-              <button
-                key={item}
-                onClick={() => {
-  if (item === 'Dashboard') navigate('/dashboard')
-  if (item === 'Training') navigate('/training/account-that-couldnt-wait')
-  }}
-                className={`px-4 py-2.5 rounded-[3px] text-sm border leading-none transition-colors ${
-                  active
-                    ? 'bg-[#d3d3cf] border-[#a7a7a3] font-bold text-[#202020]'
-                    : 'bg-white border-white font-medium text-[#202020] hover:bg-[#f0f0ed]'
-                }`}
-              >
-                {item}
-              </button>
-            );
-          })}
+        {NAV_ITEMS.map((item) => {
+  const active = item === activeNav;
+
+  return (
+    <button
+      key={item}
+      onClick={() => {
+        if (item === 'Dashboard') navigate('/dashboard');
+        if (item === 'Training') navigate('/training/account-that-couldnt-wait');
+      }}
+      className={`px-4 py-2.5 rounded-[3px] text-sm border leading-none transition-colors ${
+        active
+          ? 'bg-[#d3d3cf] border-[#a7a7a3] font-bold text-[#202020]'
+          : 'bg-white border-white font-medium text-[#202020] hover:bg-[#f0f0ed]'
+      }`}
+    >
+      {item}
+    </button>
+  );
+})}
         </div>
       </nav>
 
