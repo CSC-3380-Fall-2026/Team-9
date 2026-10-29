@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Inter:Bold";
+  src: url("https://static.figma.com/font/Inter_1") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Inter:Regular";
+  src: url("https://static.figma.com/font/Inter_1") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Inter:Semi Bold";
+  src: url("https://static.figma.com/font/Inter_1") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    background: #071a2c;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100dvh;
+  }
+
+  button,
+  input {
+    font: inherit;
+  }
+}
