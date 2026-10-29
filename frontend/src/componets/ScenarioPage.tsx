@@ -21,7 +21,7 @@
 
 import { useState } from 'react';
 import type { Scenario } from '../types/scenario'
-import { useNavigate } from '../types/scenario' 
+import { useNavigate } from 'react-router-dom'; 
 
 interface ScenarioPageProps {
   scenario: Scenario;
@@ -82,7 +82,7 @@ export default function ScenarioPage({ scenario, onBack, activeNav = 'Training' 
                 onClick={() => {
   if (item === 'Dashboard') navigate('/dashboard')
   if (item === 'Training') navigate('/training/account-that-couldnt-wait')
-  }
+  }}
                 className={`px-4 py-2.5 rounded-[3px] text-sm border leading-none transition-colors ${
                   active
                     ? 'bg-[#d3d3cf] border-[#a7a7a3] font-bold text-[#202020]'
