@@ -1,4 +1,29 @@
 
+/**
+ * mmmmmkay this like buffer page i still have to make designs to but ya girl
+ * aint feel like it and we need results rn lowkey.....
+ * CyberSense Scenario Library
+ *
+ * uhhh displays the social engineering scenarios available for training.
+ *
+ * Features:
+ * Retrieves available scenarios from the Spring Boot backend.
+ * Displays scenario titles and types.
+ * Allows users to select and start a scenario.
+ * Provides navigation back to the Dashboard.
+ *
+ * Scenario data is loaded through scenarioService.ts rather
+ * than being hardcoded into this page.
+ *
+ * When a user selects a scenario, React Router opens the
+ * reusable ScenarioPage component using that scenario's ID.
+ *
+ * Future improvements will include scenario filtering,
+ * difficulty levels, completion status, and category tags.
+ * a bunch of bs
+ */
+
+
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getScenarios } from '../services/scenarioService'

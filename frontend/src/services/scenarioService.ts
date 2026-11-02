@@ -1,3 +1,26 @@
+/**
+ * CyberSense Scenario Service
+ *
+ * Handles communication between the React frontend and
+ * the Spring Boot backend.
+ *
+ * Responsibilities:
+ *  Fetch available training scenarios from /api/scenarios.
+ *  Translate backend scenario data into the format
+ *   expected by the frontend ScenarioPage component.
+ *  Convert backend choices into selectable response options.
+ *  Format scenario messages and human-factor categories.
+ *  Send selected answers to the backend for evaluation.
+ *  Return safe/unsafe results and feedback to the frontend.
+ *
+ * This service separates backend data handling from the UI,
+ * allowing the frontend design to remain reusable.
+ *
+ * Completed responses are not yet saved to user accounts.
+ * Persistent progress tracking and analytics will be
+ * implemented separately.
+ */
+
 import type { Scenario } from '../types/scenario'
 
 export type BackendChoice = {
@@ -102,4 +125,40 @@ export async function getScenarioForTraining(
     : scenarios.find((scenario) => scenario.id === numericId) ?? scenarios[0]
 
   return convertBackendScenario(backendScenario)
+}
+
+/**
+ * Result returned by the backend after checking a scenario answer.
+ */
+export interface ScenarioSubmissionResult {
+  safe: boolean
+  feedback: string
+}
+
+/**
+ * sooooo this sends the selected answer to Spring Boot for evaluation.
+ * papes backend determines whether the answer is safe teehee.
+ */
+export async function submitScenarioAnswer(
+  scenarioId: string,
+  choiceId: string
+): Promise<ScenarioSubmissionResult> {
+  const response = await fetch(
+    `/api/scenarios/${scenarioId}/submit`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        choiceId: Number(choiceId)
+      })
+    }
+  )
+
+  if (!response.ok) {
+    throw new Error('Failed to submit scenario answer')
+  }
+
+  return response.json()
 }
