@@ -27,11 +27,16 @@ public class User {
     @Column(nullable = false)
     private String passwordHash;
 
+    // Stores the user's chosen username/display name
+    @Column(nullable = false)
+    private String username;
+
     public User() {}
 
-    public User(String email, String passwordHash) {
+    public User(String email, String passwordHash, String username) {
         this.email = email;
         this.passwordHash = passwordHash;
+        this.username = username;
     }
 
     public Long getId() { return id; }
@@ -39,4 +44,6 @@ public class User {
     public void setEmail(String email) { this.email = email; }
     public String getPasswordHash() { return passwordHash; }
     public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
 }

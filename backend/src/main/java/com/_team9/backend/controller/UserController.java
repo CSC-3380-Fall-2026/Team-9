@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
+@CrossOrigin(origins = "http://localhost:5173")
 public class UserController {
 
     private final UserRepository userRepository;
@@ -24,6 +25,9 @@ public class UserController {
         if (request.email() == null || request.email().isBlank()) {
             return ResponseEntity.badRequest().body("Email is required.");
         }
+        if (request.username() == null || request.username().isBlank()) {
+            return ResponseEntity.badRequest().body("Username is required.");
+        }
         if (request.password() == null || request.password().length() < 8) {
             return ResponseEntity.badRequest().body("Password must be at least 8 characters.");
         }
@@ -32,12 +36,12 @@ public class UserController {
         }
 
         String hashed = passwordEncoder.encode(request.password());
-        User saved = userRepository.save(new User(request.email(), hashed));
+        User saved = userRepository.save(new User(request.email(), hashed, request.username()));
 
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(new UserResponse(saved.getId(), saved.getEmail()));
+                .body(new UserResponse(saved.getId(), saved.getEmail(), saved.getUsername()));
     }
 
-    public record RegisterRequest(String email, String password) {}
-    public record UserResponse(Long id, String email) {}
+    public record RegisterRequest(String email, String password, String username) {}
+    public record UserResponse(Long id, String email, String username) {}
 }
