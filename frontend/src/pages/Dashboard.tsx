@@ -56,17 +56,22 @@ export default function Dashboard() {
 
       {/* Top Navigation */}
       <div className="bg-white border-b border-[#a7a7a3] flex h-[72px] items-center justify-between overflow-clip px-14 relative shrink-0 w-full z-10">
-        <div className="flex gap-3 items-center shrink-0">
+        <button
+  type="button"
+  onClick={() => navigate('/')}
+  className="flex gap-3 items-center shrink-0 cursor-pointer"
+  aria-label="Return to login"
+>
           <div className="bg-[#e5e5e2] border border-[#202020] rounded-[3px] shrink-0 size-8" />
           <p className="font-bold text-[#202020] text-base whitespace-nowrap">CyberSense</p>
-        </div>
+        </button>
         <div className="flex gap-2 items-center shrink-0">
           {navLinks.map((link) => (
             <button
               key={link}
                 onClick={() => {
                 if (link === 'Dashboard') navigate('/dashboard')
-              if (link === 'Training') navigate('/training/account-that-couldnt-wait')
+              if (link === 'Training') navigate('/training')
               }}
 
               className={`flex flex-col items-start overflow-clip px-4 py-2.5 rounded-[3px] shrink-0 border transition-colors cursor-pointer ${
@@ -114,7 +119,12 @@ export default function Dashboard() {
             >
               <div className="flex items-center justify-between w-full text-[#00ffc8]">
                 <p className="font-bold text-xl">Progress summary</p>
-                <button className="font-semibold text-xs hover:underline cursor-pointer text-[#00ffc8]">View training →</button>
+               <button
+  onClick={() => navigate('/training')}
+  className="font-semibold text-xs hover:underline cursor-pointer text-[#00ffc8]"
+>
+  View training →
+</button>
               </div>
               <div className="flex gap-8 items-center w-full">
                 <div className="flex flex-col gap-1 items-start shrink-0 w-[132px] text-[#00ffc8]">
@@ -195,6 +205,11 @@ export default function Dashboard() {
                     {row.map(({ label, badge }) => (
                       <button
                         key={label}
+                        onClick={() => {
+                if (label === 'Training / Scenario Library') {
+                 navigate('/training')
+                              }
+                             }}
                         className="border border-white flex gap-2.5 h-[110px] items-center overflow-clip px-3.5 py-[18px] relative rounded-[3px] shrink-0 w-[209px] hover:bg-[rgba(0,255,200,0.05)] transition-colors cursor-pointer text-left"
                         style={{ background: "rgba(7,26,44,0.75)" }}
                       >
