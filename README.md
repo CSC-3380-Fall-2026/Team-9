@@ -1,11 +1,11 @@
-# [Name of the Project] : Team 9 
+# CyberSense : Team 9 
 # Members
-Project Manager: Triston Blue (thxRealBLue)\
+Project Manager: Marie O'Connell (moconnell556)\
 Communications Lead: Taliyah Applewhite ([taliyahjulia])\
 Git Master: Pape Diagne (pape-stem-lsu)\
 Design Lead: Krishna Conerly (KrishnaV193)\
-Quality Assurance Tester: Marie OConnell (moconnell556)
-
+Quality Assurance Tester: Triston Blue (thxRealBLue)\
+Quality Assurance Tester: Kauai Cooper 
 # About Our Software
 
 An interactive website that focuses on both the technical and social factors behind cyber attacks. Users will encounter simulated cyber threats such as phishing emails, suspicious messages, fake log in pages, and impersonation attempts. What sets this apart from other cybersecurity training sites, is the focus on social factors that can influence decisions. After each scenario, users will receive feedback detailing the technical warning signs as well as the human factors used in the attack.
@@ -13,7 +13,7 @@ An interactive website that focuses on both the technical and social factors beh
 ## Platforms Tested on
 - TBD
 # Important Links
-Kanban Board: https://claude.ai/artifact/Td3VYJVZisfhmmqjaTzmMr\              
+Kanban Board: https://csc3380-team9.atlassian.net/jira/software/projects/KAN/boards/2?filter=&groupBy=none&atlOrigin=eyJpIjoiZDljMjUxZmI5YjJjNGY4M2I0YWRiNTI4YTQ1N2I5MjAiLCJwIjoiaiJ9              
 Designs: [link]\
 Styles Guide(s): [link]
 
