@@ -80,7 +80,7 @@ export default function ScenarioPage({ scenario, onBack, activeNav = 'Training' 
       key={item}
       onClick={() => {
         if (item === 'Dashboard') navigate('/dashboard');
-        if (item === 'Training') navigate('/training/account-that-couldnt-wait');
+        if (item === 'Training') navigate('/training');
       }}
       className={`px-4 py-2.5 rounded-[3px] text-sm border leading-none transition-colors ${
         active
@@ -123,7 +123,7 @@ export default function ScenarioPage({ scenario, onBack, activeNav = 'Training' 
                 </button>
               ) : (
                 <a
-                  href="/scenarios"
+                 href="/training"
                   className="text-[#0effd3] text-[13px] font-semibold hover:underline whitespace-nowrap"
                 >
                   Back to Scenario Library
