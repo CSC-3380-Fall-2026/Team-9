@@ -1,15 +1,27 @@
-/*
-  CyberSense Application Routes
-The hub tehee
- Controls which page is displayed for each URL.
- Loads Landing/Login and Dashboard pages.
-  Uses the scenario ID in the URL to find the correct scenario
- and sends that scenario data to the reusable ScenarioPage component.
 
-
-  Teehee now includes some backend stuff
-  right it waits for the backend gets the translated verion
-*/
+/**
+ * teehee
+ * CyberSense Application Routing
+ *
+ * uhhh manages navigation between the main pages of CyberSense
+ * using React Router.
+ *
+ * Current routes include:
+ * - Landing/Login page
+ * - Dashboard
+ * - Scenario Library
+ * - Individual training scenarios
+ *
+ * TrainingScenario retrieves scenario data from the Spring Boot
+ * backend using scenarioService.ts.
+ *
+ * The component handles loading, errors, and missing scenarios
+ * before displaying the reusable ScenarioPage component.
+ *
+ * Additional pages, authentication, and progress tracking
+ * will be integrated as those features are developed.
+ *
+ */
 import { getScenarioForTraining } from './services/scenarioService'
 import { useEffect, useState } from 'react'
 import { Routes, Route, useParams } from 'react-router-dom'
