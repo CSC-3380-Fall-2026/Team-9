@@ -1,27 +1,35 @@
-/*
-  CyberSense Reusable Scenario Page
 
-  Displays cybersecurity training scenarios using one reusable page layout.
-  Scenario titles, messages, response choices, and human-factor choices
-  come from the scenario data library instead of being permanently hard-coded.
-  User selections are currently stored only in React state.
-  No scenario results are permanently saved because the backend/database
-  has not been connected yet.
-  React Router is used to move between CyberSense pages.
-  multiple issues because we have no library when pulling figma design tempkate came 
-  to im trying to get rid of that but realistically 
-  the scenario page and analtic page need the backend set up to
-  be proparly display frontednd wise
-  we have no libary
-  working on tempoary navigation...tearss
-*/
+/**
+ * AHHHHHH teaaaaa we moving again
+ * CyberSense Scenario Training Page
+ *
+ * Displays a social engineering scenario loaded from the backend
+ * through the application's scenario service.
+ *
+ * Allows users to:
+ * Read the simulated message.
+ * Select how they would respond.
+ *  Identify the human factors involved.
+ *  Submit their answer for backend evaluation.
+ * Receive feedback explaining whether their response was safe.
+ *
+ * This component will handle the training interface and answer feedback teehee
+ * Saving completed attempts and calculating analytics are separate
+ * features that still need to be implemented.
+ * im finna do more but my head ass and knees hurt rn soooo godbless yall
+ * also ima expand some of this stuff again cuz we losing the plot
+ */
 
 
-
-
-import { useState } from 'react';
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import type { Scenario } from '../types/scenario'
-import { useNavigate } from 'react-router-dom'; 
+import {
+  submitScenarioAnswer,
+  type ScenarioSubmissionResult
+} from '../services/scenarioService'
+
+
 
 interface ScenarioPageProps {
   scenario: Scenario;
@@ -39,6 +47,12 @@ export default function ScenarioPage({ scenario, onBack, activeNav = 'Training' 
   const [selectedFactors, setSelectedFactors] = useState<Set<string>>(new Set());
   const [submitted, setSubmitted] = useState(false);
 
+const [submissionResult, setSubmissionResult] =
+  useState<ScenarioSubmissionResult | null>(null);
+
+const [submissionError, setSubmissionError] = useState<string | null>(null);
+const [isSubmitting, setIsSubmitting] = useState(false);
+
   function toggleFactor(id: string) {
     setSelectedFactors((prev) => {
       const next = new Set(prev);
@@ -47,11 +61,28 @@ export default function ScenarioPage({ scenario, onBack, activeNav = 'Training' 
     });
   }
 
-  function handleSubmit() {
-    if (!selectedResponse) return;
-    setSubmitted(true);
-  }
+async function handleSubmit() {
+  if (!selectedResponse || isSubmitting) return;
 
+  setIsSubmitting(true);
+  setSubmissionError(null);
+
+  try {
+    // Let Spring Boot evaluate the selected answer.
+    const result = await submitScenarioAnswer(
+      scenario.id,
+      selectedResponse
+    );
+
+    setSubmissionResult(result);
+    setSubmitted(true);
+  } catch (error) {
+    console.error('Unable to submit answer:', error);
+    setSubmissionError('Unable to check your answer. Please try again.');
+  } finally {
+    setIsSubmitting(false);
+  }
+}
   return (
     <div className="flex flex-col min-h-screen relative" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
       {/* Background */}
@@ -74,25 +105,26 @@ export default function ScenarioPage({ scenario, onBack, activeNav = 'Training' 
           <span className="font-bold text-[#202020] text-base leading-none">CyberSense</span>
         </div>
         <div className="flex items-center gap-2">
-          {NAV_ITEMS.map((item) => {
-            const active = item === activeNav;
-            return (
-              <button
-                key={item}
-                onClick={() => {
-  if (item === 'Dashboard') navigate('/dashboard')
-  if (item === 'Training') navigate('/training/account-that-couldnt-wait')
-  }}
-                className={`px-4 py-2.5 rounded-[3px] text-sm border leading-none transition-colors ${
-                  active
-                    ? 'bg-[#d3d3cf] border-[#a7a7a3] font-bold text-[#202020]'
-                    : 'bg-white border-white font-medium text-[#202020] hover:bg-[#f0f0ed]'
-                }`}
-              >
-                {item}
-              </button>
-            );
-          })}
+        {NAV_ITEMS.map((item) => {
+  const active = item === activeNav;
+
+  return (
+    <button
+      key={item}
+      onClick={() => {
+        if (item === 'Dashboard') navigate('/dashboard');
+        if (item === 'Training') navigate('/training');
+      }}
+      className={`px-4 py-2.5 rounded-[3px] text-sm border leading-none transition-colors ${
+        active
+          ? 'bg-[#d3d3cf] border-[#a7a7a3] font-bold text-[#202020]'
+          : 'bg-white border-white font-medium text-[#202020] hover:bg-[#f0f0ed]'
+      }`}
+    >
+      {item}
+    </button>
+  );
+})}
         </div>
       </nav>
 
@@ -124,7 +156,7 @@ export default function ScenarioPage({ scenario, onBack, activeNav = 'Training' 
                 </button>
               ) : (
                 <a
-                  href="/scenarios"
+                 href="/training"
                   className="text-[#0effd3] text-[13px] font-semibold hover:underline whitespace-nowrap"
                 >
                   Back to Scenario Library
@@ -221,10 +253,15 @@ export default function ScenarioPage({ scenario, onBack, activeNav = 'Training' 
                   return (
                     <button
                       key={option.id}
-                      onClick={() => {
-                        setSelectedResponse(option.id);
-                        setSubmitted(false);
-                      }}
+
+onClick={() => {
+  if (isSubmitting) return;
+
+  setSelectedResponse(option.id);
+  setSubmitted(false);
+  setSubmissionResult(null);
+  setSubmissionError(null);
+}}
                       className={`flex items-center gap-3 p-3.5 rounded-[3px] border text-left w-full transition-colors ${
                         isSelected
                           ? 'bg-[rgba(0,255,200,0.12)] border-[rgba(0,255,200,0.6)]'
@@ -248,17 +285,29 @@ export default function ScenarioPage({ scenario, onBack, activeNav = 'Training' 
 
               {submitted ? (
                 <div className="bg-[rgba(0,255,200,0.12)] border border-[rgba(0,255,200,0.4)] rounded-[3px] px-5 py-3">
-                  <p className="font-bold text-[#00ffc8] text-sm">Response submitted.</p>
+
+<p className="font-bold text-[#00ffc8] text-sm">
+  {submissionResult?.safe ? 'Safe response' : 'Unsafe response'}
+</p>
+
+<p className="mt-2 text-sm text-[#00ffc8]">
+  {submissionResult?.feedback}
+</p>
                 </div>
               ) : (
                 <button
                   onClick={handleSubmit}
-                  disabled={!selectedResponse}
+                  disabled={!selectedResponse || isSubmitting || submitted}
                   className="bg-[#00ffc8] text-[#071a2c] font-bold text-[14px] px-[22px] py-[13px] rounded-[3px] leading-none transition-opacity disabled:opacity-40 disabled:cursor-not-allowed hover:enabled:opacity-90 w-fit"
                 >
                   Submit Response
                 </button>
               )}
+{submissionError && (
+  <p role="alert" className="mt-2 text-sm text-red-300">
+    {submissionError}
+  </p>
+)}
             </div>
 
             {/* Human Factors */}
