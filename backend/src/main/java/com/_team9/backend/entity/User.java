@@ -1,11 +1,12 @@
 package com._team9.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;;
+import jakarta.persistence.Table;
 
 //Creates a user entity for login and registration
 
@@ -22,6 +23,7 @@ public class User {
     private String email;
 
     // Stores the hashed password for security purposes
+    @JsonIgnore
     @Column(nullable = false)
     private String passwordHash;
 
