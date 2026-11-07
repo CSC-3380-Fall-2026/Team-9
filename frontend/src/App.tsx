@@ -1,4 +1,3 @@
-
 /**
  * teehee
  * CyberSense Application Routing
@@ -21,81 +20,74 @@
  * Additional pages, authentication, and progress tracking
  * will be integrated as those features are developed.
  *
+ * Pape, 2024-06-05
+ * added import for CreateAccount page and route for it
+ * 
  */
-import { getScenarioForTraining } from './services/scenarioService'
-import { useEffect, useState } from 'react'
-import { Routes, Route, useParams } from 'react-router-dom'
+import { getScenarioForTraining } from "./services/scenarioService";
+import { useEffect, useState } from "react";
+import { Routes, Route, useParams } from "react-router-dom";
 
-import LandingLogin from './pages/LandingLogin'
-import Dashboard from './pages/Dashboard'
-import ScenarioLibrary from './pages/ScenarioLibrary'
-import ScenarioPage from './components/ScenarioPage'
+import LandingLogin from "./pages/LandingLogin";
+import Dashboard from "./pages/Dashboard";
+import ScenarioLibrary from "./pages/ScenarioLibrary";
+import ScenarioPage from "./components/ScenarioPage";
+import CreateAccount from "./pages/CreateAccount";
 
-
-
-import type { Scenario } from './types/scenario'
-
+import type { Scenario } from "./types/scenario";
 
 // Loads a scenario from the Spring Boot backend
 function TrainingScenario() {
-  const { scenarioId } = useParams<{ scenarioId: string }>()
+  const { scenarioId } = useParams<{ scenarioId: string }>();
 
-  const [scenario, setScenario] = useState<Scenario | undefined>()
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [scenario, setScenario] = useState<Scenario | undefined>();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setLoading(true)
-    setError(null)
+    setLoading(true);
+    setError(null);
 
     getScenarioForTraining(scenarioId)
       .then((loadedScenario) => {
-        setScenario(loadedScenario)
+        setScenario(loadedScenario);
       })
       .catch((err) => {
-        console.error(err)
-        setError('Unable to load scenario.')
+        console.error(err);
+        setError("Unable to load scenario.");
       })
       .finally(() => {
-        setLoading(false)
-      })
-  }, [scenarioId])
+        setLoading(false);
+      });
+  }, [scenarioId]);
 
   if (loading) {
-    return <div>Loading scenario...</div>
+    return <div>Loading scenario...</div>;
   }
 
   if (error) {
-    return <div>{error}</div>
+    return <div>{error}</div>;
   }
 
   if (!scenario) {
-    return <div>Scenario not found.</div>
+    return <div>Scenario not found.</div>;
   }
 
-  return <ScenarioPage scenario={scenario} />
+  return <ScenarioPage scenario={scenario} />;
 }
-
 
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingLogin />} />
 
-      <Route
-        path="/dashboard"
-        element={<Dashboard />}
-      />
+      <Route path="/dashboard" element={<Dashboard />} />
       {/* this displays the scenario library using scenarios from the backend omggg.... */}
-<Route
-  path="/training"
-  element={<ScenarioLibrary />}
-/>
+      <Route path="/training" element={<ScenarioLibrary />} />
 
-      <Route
-        path="/training/:scenarioId"
-        element={<TrainingScenario />}
-      />
+      <Route path="/training/:scenarioId" element={<TrainingScenario />} />
+      <Route path="/CreateAccount" element={<CreateAccount />} />
     </Routes>
-  )
+
+  );
 }
