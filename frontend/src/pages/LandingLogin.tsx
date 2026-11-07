@@ -31,18 +31,9 @@ UPDATES ARE CONSTANT AND I ADD TO THIS
   is added user will actuall have to type in passwords.
 */
 
+import { useNavigate } from "react-router-dom";
 
-
-
-
-
-
-import { useNavigate } from 'react-router-dom'
-
-const assetPathPrefix = "/assets"
-
-
-
+const assetPathPrefix = "/assets";
 
 // This the main area of CyberSense platform that is shown on the landing page.
 
@@ -63,10 +54,10 @@ const platformAreas = [
     name: "Community Forum",
     icon: `${assetPathPrefix}/867c2.svg`,
   },
-]
+];
 // Okay so this will allow this page to move between routes without reloading the site.
-export default function LandingLogin() { 
-    const navigate = useNavigate()
+export default function LandingLogin() {
+  const navigate = useNavigate();
   return (
     <main className="relative flex min-h-dvh flex-col overflow-hidden bg-[#071a2c]">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
@@ -99,7 +90,9 @@ export default function LandingLogin() {
             Human-Centered Cybersecurity Training
           </p>
           <p className="font-['Inter:Regular'] text-base leading-6 font-normal">
-           Learn how attackers use both technical tricks and human behavior to manipulate users, and how to recognize the warning signs before responding.
+            Learn how attackers use both technical tricks and human behavior to
+            manipulate users, and how to recognize the warning signs before
+            responding.
           </p>
         </div>
       </section>
@@ -108,12 +101,12 @@ export default function LandingLogin() {
         <div className="flex w-full items-start gap-6 max-lg:flex-col">
           <div className="w-[420px] shrink-0 max-lg:w-full">
             <form
-            //after login is submitted sends user to dashboard teehee.
+              //after login is submitted sends user to dashboard teehee.
               className="flex w-full flex-col items-start gap-4 rounded-[3px] border border-white bg-[rgba(7,26,44,0.75)] p-6"
-             onSubmit={(event) => {
-               event.preventDefault()
-                     navigate('/dashboard')
-                                            }}
+              onSubmit={(event) => {
+                event.preventDefault();
+                navigate("/dashboard");
+              }}
             >
               <h2 className="font-['Inter:Bold'] text-2xl leading-normal font-bold text-[#00ffc8]">
                 Log In
@@ -159,12 +152,13 @@ export default function LandingLogin() {
                 <span className="font-['Inter:Regular'] font-normal">
                   New user?
                 </span>
-                <a
-                  className="font-['Inter:Bold'] font-bold hover:underline"
-                  href="#create-account"
+                {/* changed this to a button and add onClick to navigate to create account page - Pape */}
+                <span
+                  className="font-['Inter:Bold'] font-bold hover:underline cursor-pointer"
+                  onClick={() => navigate("/CreateAccount")}
                 >
                   Create Account
-                </a>
+                </span>
               </p>
             </form>
           </div>
@@ -175,8 +169,14 @@ export default function LandingLogin() {
                 About CyberSense
               </h2>
               <p className="font-['Inter:Regular'] text-base leading-6 font-normal">
-               CyberSense is an interactive cybersecurtity awareness platform focused on both technical threats and the human factors behind social engineering. Users work through realsitic scenarios involving phishing, impersonation, urgency, authority,
-               suspicious links, credential requests, and other manipulation techniques.After each scenario, CyberSense explains the warning signs, identifies the human and technical cues involved, and helps users track patterns in their performance over time.
+                CyberSense is an interactive cybersecurtity awareness platform
+                focused on both technical threats and the human factors behind
+                social engineering. Users work through realsitic scenarios
+                involving phishing, impersonation, urgency, authority,
+                suspicious links, credential requests, and other manipulation
+                techniques.After each scenario, CyberSense explains the warning
+                signs, identifies the human and technical cues involved, and
+                helps users track patterns in their performance over time.
               </p>
             </article>
 
@@ -204,5 +204,5 @@ export default function LandingLogin() {
         </div>
       </section>
     </main>
-  )
+  );
 }
