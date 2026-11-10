@@ -13,7 +13,7 @@
 */
 
 
-
+import { logout } from "../services/authService";
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom' 
 
@@ -66,6 +66,29 @@ useEffect(() => {
   loadUser();
 }, []);
   const navigate =useNavigate() 
+
+const [isLoggingOut, setIsLoggingOut] = useState(false);
+const [logoutError, setLogoutError] = useState("");
+
+async function handleLogout() {
+  if (isLoggingOut) return;
+
+  setIsLoggingOut(true);
+  setLogoutError("");
+
+  try {
+    await logout();
+    navigate("/", { replace: true });
+  } catch (error) {
+    setLogoutError(
+      error instanceof Error
+        ? error.message
+        : "Unable to log out."
+    );
+  } finally {
+    setIsLoggingOut(false);
+  }
+}
   return (
     <div className="flex flex-col items-start relative min-h-screen w-full" style={{ fontFamily: "'Inter', sans-serif" }}>
       {/* Background */}
@@ -110,6 +133,20 @@ useEffect(() => {
   >
     Welcome, {username}!
   </span>
+)}
+<button
+  type="button"
+  onClick={handleLogout}
+  disabled={isLoggingOut}
+  className="rounded-[3px] border border-[#a7a7a3] bg-[#202020] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#383838] disabled:cursor-not-allowed disabled:opacity-50"
+>
+  {isLoggingOut ? "Logging Out..." : "Log Out"}
+</button>
+
+{logoutError && (
+  <p role="alert" className="text-sm text-red-600">
+    {logoutError}
+  </p>
 )}
         </div>
       </div>

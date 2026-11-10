@@ -73,6 +73,20 @@ public class SecurityConfig {
 
     .permitAll()
 )
+.logout(logout -> logout
+    // End the user's session when they log out.
+    .logoutUrl("/api/auth/logout")
+    .invalidateHttpSession(true)
+    .clearAuthentication(true)
+    .deleteCookies("JSESSIONID")
+
+    // Return success without redirecting.
+    .logoutSuccessHandler((request, response, authentication) -> {
+        response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+    })
+
+    .permitAll()
+)
 
             // Return 401 when authentication is required.
             .exceptionHandling(ex -> ex

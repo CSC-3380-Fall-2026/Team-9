@@ -27,7 +27,7 @@
 import { getScenarioForTraining } from "./services/scenarioService";
 import { useEffect, useState } from "react";
 import { Routes, Route, useParams } from "react-router-dom";
-
+import ProtectedRoute from "./components/ProtectedRoute";
 import LandingLogin from "./pages/LandingLogin";
 import Dashboard from "./pages/Dashboard";
 import ScenarioLibrary from "./pages/ScenarioLibrary";
@@ -79,16 +79,23 @@ function TrainingScenario() {
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<LandingLogin />} />
-<Route path="/analytics" element={<ProgressAnalytics />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      {/* this displays the scenario library using scenarios from the backend omggg.... */}
-      <Route path="/training" element={<ScenarioLibrary />} />
+  
+<Routes>
+  {/* Public pages */}
+  <Route path="/" element={<LandingLogin />} />
+  <Route path="/CreateAccount" element={<CreateAccount />} />
 
-      <Route path="/training/:scenarioId" element={<TrainingScenario />} />
-      <Route path="/CreateAccount" element={<CreateAccount />} />
-    </Routes>
+  {/* Pages that require login */}
+  <Route element={<ProtectedRoute />}>
+    <Route path="/dashboard" element={<Dashboard />} />
+    <Route path="/training" element={<ScenarioLibrary />} />
+    <Route
+      path="/training/:scenarioId"
+      element={<TrainingScenario />}
+    />
+    <Route path="/analytics" element={<ProgressAnalytics />} />
+  </Route>
+</Routes>
 
   );
 }

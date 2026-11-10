@@ -36,3 +36,25 @@ export async function login(
     throw new Error("Login failed. Please try again.");
   }
 }
+
+/**
+ * Logs the current user out of CyberSense.
+ *
+ * Sends a protected request to Spring Security
+ * to invalidate the authenticated session.
+ */
+export async function logout(): Promise<void> {
+  const csrf = await getCsrfToken();
+
+  const response = await fetch("/api/auth/logout", {
+    method: "POST",
+    credentials: "same-origin",
+    headers: {
+      [csrf.headerName]: csrf.token,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Unable to log out. Please try again.");
+  }
+}
