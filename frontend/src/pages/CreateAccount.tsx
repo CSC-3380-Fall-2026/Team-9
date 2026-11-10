@@ -1,3 +1,4 @@
+import { getCsrfToken } from "../services/csrfService";
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -28,11 +29,18 @@ export default function CreateAccount() {
         setLoading(true)
         try {
             // needs to run on network to test use "npm run dev -- --host"
-            const res = await fetch("http://localhost:8080/api/users/register", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, username, password }),
-            })
+        
+const csrf = await getCsrfToken();
+
+const res = await fetch("/api/users/register", {
+  method: "POST",
+  credentials: "same-origin",
+  headers: {
+    "Content-Type": "application/json",
+    [csrf.headerName]: csrf.token,
+  },
+  body: JSON.stringify({ email, username, password }),
+});
 
             if (!res.ok) {
                 const message = await res.text()

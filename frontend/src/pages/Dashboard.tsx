@@ -13,8 +13,8 @@
 */
 
 
-
-
+import { logout } from "../services/authService";
+import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom' 
 
 const bgImage = "/assets/47d8c.png";
@@ -45,7 +45,50 @@ const explorLinks = [
 ];
 
 export default function Dashboard() {
+  const [username, setUsername] = useState<string | null>(null);
+
+useEffect(() => {
+  async function loadUser() {
+    try {
+      const response = await fetch("/api/auth/me", {
+        credentials: "same-origin",
+      });
+
+      if (!response.ok) return;
+
+      const user = await response.json();
+      setUsername(user.username);
+    } catch (error) {
+      console.error("Unable to load user information:", error);
+    }
+  }
+
+  loadUser();
+}, []);
   const navigate =useNavigate() 
+
+const [isLoggingOut, setIsLoggingOut] = useState(false);
+const [logoutError, setLogoutError] = useState("");
+
+async function handleLogout() {
+  if (isLoggingOut) return;
+
+  setIsLoggingOut(true);
+  setLogoutError("");
+
+  try {
+    await logout();
+    navigate("/", { replace: true });
+  } catch (error) {
+    setLogoutError(
+      error instanceof Error
+        ? error.message
+        : "Unable to log out."
+    );
+  } finally {
+    setIsLoggingOut(false);
+  }
+}
   return (
     <div className="flex flex-col items-start relative min-h-screen w-full" style={{ fontFamily: "'Inter', sans-serif" }}>
       {/* Background */}
@@ -83,6 +126,28 @@ export default function Dashboard() {
               <span className="text-sm whitespace-nowrap">{link}</span>
             </button>
           ))}
+          {username && (
+  <span
+    className="max-w-[180px] truncate rounded-[3px] border border-[#a7a7a3] bg-[#d3d3cf] px-3 py-2.5 text-sm font-semibold text-[#202020]"
+    title={username}
+  >
+    Welcome, {username}!
+  </span>
+)}
+<button
+  type="button"
+  onClick={handleLogout}
+  disabled={isLoggingOut}
+  className="rounded-[3px] border border-[#a7a7a3] bg-[#202020] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#383838] disabled:cursor-not-allowed disabled:opacity-50"
+>
+  {isLoggingOut ? "Logging Out..." : "Log Out"}
+</button>
+
+{logoutError && (
+  <p role="alert" className="text-sm text-red-600">
+    {logoutError}
+  </p>
+)}
         </div>
       </div>
 
@@ -96,7 +161,7 @@ export default function Dashboard() {
         >
           <div className="flex flex-col gap-2 items-start">
             <p className="font-bold text-[#0effd3] text-xs uppercase tracking-wide">Dashboard / Learning overview</p>
-            <p className="font-bold text-[#00ffc8] text-[28px] leading-tight">Welcome back, user</p>
+            <p className="font-bold text-[#00ffc8] text-[28px] leading-tight">Welcome back, {username ?? "user"}!</p>
             <p className="text-[#00ffc8] text-sm">
               Continue building the human skills that help you recognize and respond to social engineering.
             </p>
@@ -205,11 +270,14 @@ export default function Dashboard() {
                     {row.map(({ label, badge }) => (
                       <button
                         key={label}
-                        onClick={() => {
-                if (label === 'Training / Scenario Library') {
-                 navigate('/training')
-                              }
-                             }}
+                      
+onClick={() => {
+  if (label === 'Training / Scenario Library') {
+    navigate('/training')
+  } else if (label === 'Progress & Analytics') {
+    navigate('/analytics')
+  }
+}}
                         className="border border-white flex gap-2.5 h-[110px] items-center overflow-clip px-3.5 py-[18px] relative rounded-[3px] shrink-0 w-[209px] hover:bg-[rgba(0,255,200,0.05)] transition-colors cursor-pointer text-left"
                         style={{ background: "rgba(7,26,44,0.75)" }}
                       >
