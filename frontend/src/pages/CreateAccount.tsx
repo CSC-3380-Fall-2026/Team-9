@@ -66,12 +66,8 @@ const res = await fetch("/api/users/register", {
                 <div className="absolute inset-0 bg-[#071a2c]/80" />
             </div>
 
-            <nav className="relative z-10 flex h-[72px] shrink-0 items-center border-b border-[#a7a7a3] bg-white px-6 sm:px-10 lg:px-14">
-                <div className="flex items-center gap-3">
-                    <div
-                        aria-hidden="true"
-                        className="size-8 rounded-[3px] border border-[#202020] bg-[#e5e5e2]"
-                    />
+            <nav className="bg-white/55 backdrop-blur-[9px]relative z-10 flex h-[72px] shrink-0 items-center border-b border-[#a7a7a3] bg-white px-6 sm:px-10 lg:px-14">
+                <div>
                     <span className="font-['Inter:Bold'] text-base font-bold text-[#202020]">
                         CyberSense
                     </span>

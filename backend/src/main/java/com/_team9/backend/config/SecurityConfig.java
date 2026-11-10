@@ -1,3 +1,4 @@
+
 package com._team9.backend.config;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -5,7 +6,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
@@ -23,16 +23,9 @@ public class SecurityConfig {
             throws Exception {
 
         http
-            // Let Spring pick up the @CrossOrigin config on our controllers.
-            .cors(Customizer.withDefaults())
-
             .authorizeHttpRequests(auth -> auth
-                // Always let CORS preflight requests through.
-                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-
-                // Allow the frontend to request a CSRF token.
-                .requestMatchers(HttpMethod.GET, "/api/csrf").permitAll()
-
+// Allow the frontend to request a CSRF token.
+.requestMatchers(HttpMethod.GET, "/api/csrf").permitAll()
                 // Allow visitors to view training scenarios.
                 .requestMatchers(
                     HttpMethod.GET, "/api/scenarios"
@@ -45,7 +38,7 @@ public class SecurityConfig {
                     "/api/scenarios/*/submit"
                 ).permitAll()
 
-                // Dev-only H2 database console.
+                // H2 database console  Pape
                 .requestMatchers("/h2-console/**").permitAll()
 
                 // Personal analytics require authentication.
@@ -56,49 +49,48 @@ public class SecurityConfig {
                 // Other endpoints require authentication by default.
                 .anyRequest().authenticated()
             )
+.formLogin(form -> form
+    // React will submit login credentials to this endpoint.
+    .loginProcessingUrl("/api/auth/login")
 
-            .formLogin(form -> form
-                // React will submit login credentials to this endpoint.
-                .loginProcessingUrl("/api/auth/login")
+    // Use the email field to find the registered account.
+    .usernameParameter("email")
 
-                // Use the email field to find the registered account.
-                .usernameParameter("email")
+    // Return success instead of redirecting automatically.
+    .successHandler((request, response, authentication) -> {
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType("application/json");
+        response.getWriter().write(
+            "{\"message\":\"Login successful\"}"
+        );
+    })
 
-                // Return success instead of redirecting automatically.
-                .successHandler((request, response, authentication) -> {
-                    response.setStatus(HttpServletResponse.SC_OK);
-                    response.setContentType("application/json");
-                    response.getWriter().write(
-                        "{\"message\":\"Login successful\"}"
-                    );
-                })
+    // Incorrect credentials must not grant access.
+    .failureHandler((request, response, exception) -> {
+        response.sendError(
+            HttpServletResponse.SC_UNAUTHORIZED,
+            "Invalid email or password"
+        );
+    })
 
-                // Incorrect credentials must not grant access.
-                .failureHandler((request, response, exception) -> {
-                    response.sendError(
-                        HttpServletResponse.SC_UNAUTHORIZED,
-                        "Invalid email or password"
-                    );
-                })
+    .permitAll()
+)
+.logout(logout -> logout
+    // End the user's session when they log out.
+    .logoutUrl("/api/auth/logout")
+    .invalidateHttpSession(true)
+    .clearAuthentication(true)
+    .deleteCookies("JSESSIONID")
 
-                .permitAll()
-            )
-            .logout(logout -> logout
-                // End the user's session when they log out.
-                .logoutUrl("/api/auth/logout")
-                .invalidateHttpSession(true)
-                .clearAuthentication(true)
-                .deleteCookies("JSESSIONID")
+    // Return success without redirecting.
+    .logoutSuccessHandler((request, response, authentication) -> {
+        response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+    })
 
-                // Return success without redirecting.
-                .logoutSuccessHandler((request, response, authentication) -> {
-                    response.setStatus(HttpServletResponse.SC_NO_CONTENT);
-                })
+    .permitAll()
+)
 
-                .permitAll()
-            )
-
-            // H2 console doesn't send CSRF tokens the way our frontend does.
+                        // H2 console doesn't send CSRF tokens the way our frontend does.
             .csrf(csrf -> csrf
                 .ignoringRequestMatchers("/h2-console/**")
             )
