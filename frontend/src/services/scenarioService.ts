@@ -21,6 +21,7 @@
  * implemented separately.
  */
 
+import { getCsrfToken } from "./csrfService";
 import type { Scenario } from '../types/scenario'
 
 export type BackendChoice = {
@@ -139,26 +140,35 @@ export interface ScenarioSubmissionResult {
  * sooooo this sends the selected answer to Spring Boot for evaluation.
  * papes backend determines whether the answer is safe teehee.
  */
+
 export async function submitScenarioAnswer(
   scenarioId: string,
   choiceId: string
 ): Promise<ScenarioSubmissionResult> {
+
+  // Get the security token before submitting an answer.
+  const csrf = await getCsrfToken();
+
   const response = await fetch(
     `/api/scenarios/${scenarioId}/submit`,
     {
-      method: 'POST',
+      method: "POST",
+      credentials: "same-origin",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
+        [csrf.headerName]: csrf.token,
       },
       body: JSON.stringify({
-        choiceId: Number(choiceId)
-      })
+        choiceId: Number(choiceId),
+      }),
     }
-  )
+  );
 
   if (!response.ok) {
-    throw new Error('Failed to submit scenario answer')
+    throw new Error(
+      `Failed to submit scenario answer: ${response.status}`
+    );
   }
 
-  return response.json()
+  return response.json();
 }

@@ -30,7 +30,8 @@ UPDATES ARE CONSTANT AND I ADD TO THIS
   Okat teaaaa it works right now just have to press login obvi tho once backen 
   is added user will actuall have to type in passwords.
 */
-
+import { useState, type FormEvent } from "react";
+import { login } from "../services/authService";
 import { useNavigate } from "react-router-dom";
 
 const assetPathPrefix = "/assets";
@@ -58,6 +59,32 @@ const platformAreas = [
 // Okay so this will allow this page to move between routes without reloading the site.
 export default function LandingLogin() {
   const navigate = useNavigate();
+
+const [loginError, setLoginError] = useState("");
+const [isLoggingIn, setIsLoggingIn] = useState(false);
+
+// Only navigate after the backend verifies the credentials.
+async function handleLogin(event: FormEvent<HTMLFormElement>) {
+  event.preventDefault();
+
+  const formData = new FormData(event.currentTarget);
+  const email = String(formData.get("username") ?? "").trim();
+  const password = String(formData.get("password") ?? "");
+
+  setLoginError("");
+  setIsLoggingIn(true);
+
+  try {
+    await login(email, password);
+    navigate("/dashboard");
+  } catch (error) {
+    setLoginError(
+      error instanceof Error ? error.message : "Unable to log in."
+    );
+  } finally {
+    setIsLoggingIn(false);
+  }
+}
   return (
     <main className="relative flex min-h-dvh flex-col overflow-hidden bg-[#071a2c]">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
@@ -103,14 +130,16 @@ export default function LandingLogin() {
             <form
               //after login is submitted sends user to dashboard teehee.
               className="flex w-full flex-col items-start gap-4 rounded-[3px] border border-white bg-[rgba(7,26,44,0.75)] p-6"
-              onSubmit={(event) => {
-                event.preventDefault();
-                navigate("/dashboard");
-              }}
+             onSubmit={handleLogin}
             >
               <h2 className="font-['Inter:Bold'] text-2xl leading-normal font-bold text-[#00ffc8]">
                 Log In
               </h2>
+{loginError && (
+  <p role="alert" className="text-sm text-red-400">
+    {loginError}
+  </p>
+)}
 
               <label className="flex w-full flex-col gap-2 font-['Inter:Semi_Bold'] text-sm leading-normal font-semibold text-[#00ffc8]">
                 Email or Username
@@ -137,8 +166,9 @@ export default function LandingLogin() {
               <button
                 className="h-12 w-full cursor-pointer rounded-[3px] bg-[#363636] font-['Inter:Bold'] text-sm font-bold text-white transition-colors hover:bg-[#464646] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00ffc8]"
                 type="submit"
+                disabled={isLoggingIn}
               >
-                Log In
+              {isLoggingIn ? "Logging In..." : "Log In"}
               </button>
 
               <a
