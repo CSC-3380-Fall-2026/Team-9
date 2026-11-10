@@ -33,6 +33,7 @@ import Dashboard from "./pages/Dashboard";
 import ScenarioLibrary from "./pages/ScenarioLibrary";
 import ScenarioPage from "./components/ScenarioPage";
 import CreateAccount from "./pages/CreateAccount";
+import ProgressAnalytics from "./pages/ProgressAnalytics";
 
 import type { Scenario } from "./types/scenario";
 
@@ -80,7 +81,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingLogin />} />
-
+<Route path="/analytics" element={<ProgressAnalytics />} />
       <Route path="/dashboard" element={<Dashboard />} />
       {/* this displays the scenario library using scenarios from the backend omggg.... */}
       <Route path="/training" element={<ScenarioLibrary />} />
