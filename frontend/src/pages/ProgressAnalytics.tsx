@@ -82,7 +82,7 @@ export default function ProgressAnalytics() {
         backgroundAttachment: "fixed"
       }}
     >
-      <header className="flex flex-wrap items-center justify-between gap-4 border-b border-white/30 bg-[#00bfa5]/55 px-6 py-4 backdrop-blur-md">
+      <header className="flex flex-wrap items-center justify-between gap-4 border-b border-white/30 bg-white/55 backdrop-blur-[9px] px-6 py-4 backdrop-blur-md">
         <Link to="/" className="font-bold text-[#071a2c]">
           CyberSense
         </Link>
@@ -110,7 +110,7 @@ export default function ProgressAnalytics() {
               <h1 className="mt-2 text-3xl font-bold">
                 Progress &amp; Analytics
               </h1>
-              <p className="mt-2 max-w-3xl text-sm">
+              <p className="mt-2 max-w-3xl text-white/70 text-sm">
                 Track your cybersecurity training and identify the social
                 engineering techniques that affect you most.
               </p>
@@ -130,7 +130,7 @@ export default function ProgressAnalytics() {
 
         {error && (
           <section className={panel} role="alert">
-            <h2 className="text-xl font-bold text-[#ffc400]">
+            <h2 className="text-xl font-bold text-[#00ffc8]">
               Analytics unavailable
             </h2>
             <p className="mt-2 text-sm">{error}</p>
@@ -145,10 +145,10 @@ export default function ProgressAnalytics() {
           <div className="grid gap-5 lg:grid-cols-3">
             <div className="space-y-5 lg:col-span-2">
               <section className={panel}>
-                <h2 className="text-xl font-bold text-[#ffc400]">
+                <h2 className="text-xl font-bold text-[#00ffc8]">
                   Overall Progress Summary
                 </h2>
-                <p className="mt-1 text-sm text-[#ffc400]">
+                <p className="mt-1 text-sm text-white/70">
                   Your recorded training performance.
                 </p>
 
@@ -171,8 +171,8 @@ export default function ProgressAnalytics() {
                       key={item.label}
                       className="rounded border border-white/30 bg-white/10 p-4"
                     >
-                      <p className="text-xs text-[#ffc400]">{item.label}</p>
-                      <p className="mt-2 text-3xl font-bold text-[#ffc400]">
+                      <p className="text-xs text-[#00ffc8]">{item.label}</p>
+                      <p className="mt-2 text-3xl font-bold text-[#00ffc8]">
                         {item.value}
                       </p>
                     </div>
@@ -180,23 +180,23 @@ export default function ProgressAnalytics() {
                 </div>
 
                 {!hasData && (
-                  <p className="mt-4 text-sm">
+                  <p className="mt-4 text-sm text-white/70">
                     No completed attempts recorded yet.
                   </p>
                 )}
               </section>
 
               <section className={panel}>
-                <h2 className="text-xl font-bold text-[#ffc400]">
+                <h2 className="text-xl font-bold text-[#00ffc8]">
                   Human-Factor Performance
                 </h2>
-                <p className="mt-1 text-sm text-[#ffc400]">
+                <p className="mt-1 text-sm text-white/70">
                   How often you recognize different influence techniques.
                 </p>
 
                 <div className="mt-4 space-y-3">
                   {factors.length === 0 && (
-                    <p className="text-sm">
+                    <p className="text-sm text-white/70">
                       Complete training scenarios to see your performance
                       by human factor.
                     </p>
@@ -213,14 +213,14 @@ export default function ProgressAnalytics() {
                         key={factor.humanFactor}
                         className="rounded border border-white/30 bg-white/10 p-3"
                       >
-                        <div className="mb-2 flex justify-between gap-3 text-sm font-semibold text-[#ffc400]">
+                        <div className="mb-2 flex justify-between gap-3 text-sm font-semibold text-[#00ffc8]">
                           <span>{formatFactor(factor.humanFactor)}</span>
                           <span>{performance}%</span>
                         </div>
 
                         <div className="h-2 overflow-hidden rounded bg-white/20">
                           <div
-                            className="h-full bg-[#ffc400]"
+                            className="h-full bg-[#00ffc8]"
                             style={{ width: `${performance}%` }}
                           />
                         </div>
@@ -237,20 +237,20 @@ export default function ProgressAnalytics() {
 
             <div className="space-y-5">
               <section className={panel}>
-                <h2 className="text-xl font-bold text-[#ffc400]">
+                <h2 className="text-xl font-bold text-[#00ffc8]">
                   Scenario Type Performance
                 </h2>
-                <p className="mt-3 text-sm">
+                <p className="mt-3 text-sm text-white/70">
                   Performance by scenario type will appear once
                   that analytics endpoint is connected.
                 </p>
               </section>
 
               <section className={panel}>
-                <h2 className="text-xl font-bold text-[#ffc400]">
+                <h2 className="text-xl font-bold text-[#00ffc8]">
                   Recent Scenario Results
                 </h2>
-                <p className="mt-3 text-sm">
+                <p className="mt-3 text-sm text-white/70">
                   Your recent training history will appear here
                   after the history API is implemented.
                 </p>

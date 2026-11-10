@@ -97,11 +97,11 @@ async function handleSubmit() {
 
       {/* Top Navigation */}
       <nav
-        className="relative z-10 flex items-center justify-between h-[72px] px-14 bg-white border-b border-[#a7a7a3] shrink-0"
+        className="relative z-10 flex items-center justify-between h-[72px] px-14 bg-white/55 backdrop-blur-[9px] border-b border-[#a7a7a3] shrink-0"
         style={{ fontFamily: "'Inter', sans-serif" }}
       >
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-[#e5e5e2] border border-[#202020] rounded-[3px] shrink-0" />
+          <div/>
           <span className="font-bold text-[#202020] text-base leading-none">CyberSense</span>
         </div>
         <div className="flex items-center gap-2">
@@ -114,6 +114,11 @@ async function handleSubmit() {
       onClick={() => {
         if (item === 'Dashboard') navigate('/dashboard');
         if (item === 'Training') navigate('/training');
+        //if (item === 'Classes') navigate('/classes');
+        //if (item === 'Forum') navigate('/forum');
+        //if (item === 'Profile') navigate('/profile');
+        if (item === 'Progress') navigate('/progress');
+        //if (item === 'Admin') navigate('/admin');
       }}
       className={`px-4 py-2.5 rounded-[3px] text-sm border leading-none transition-colors ${
         active
@@ -131,7 +136,7 @@ async function handleSubmit() {
       {/* Page Content */}
       <main className="relative z-10 flex-1 flex flex-col gap-6 px-14 py-9 pb-10 min-h-0">
         {/* Scenario Header Panel */}
-        <div className="backdrop-blur-[9px] bg-[rgba(7,26,44,0.75)] border border-[rgba(241,93,85,0.2)] rounded-[3px] shadow-[0px_12px_24px_0px_rgba(0,0,0,0.2)] p-6 flex flex-col gap-4 shrink-0">
+        <div className="backdrop-blur-[9px] bg-[rgba(7,26,44,0.75)] border border-[rgba(255,255,255,0.4)] rounded-[3px] shadow-[0px_12px_24px_0px_rgba(0,0,0,0.2)] p-6 flex flex-col gap-4 shrink-0">
           {/* Header Top */}
           <div className="flex items-start justify-between gap-4">
             <div className="flex flex-col gap-2 text-[#0effd3]">
@@ -142,7 +147,7 @@ async function handleSubmit() {
               <p className="text-sm font-normal opacity-80 max-w-2xl">{scenario.description}</p>
             </div>
             <div className="flex flex-col items-end gap-2.5 shrink-0">
-              <div className="bg-[rgba(34,197,94,0.07)] border border-[rgba(34,197,94,0.25)] rounded-[3px] px-3 py-2">
+              <div className="bg-[rgba(34,197,94,0.07)] border border-[rgba(255,255,255,0.4)] rounded-[3px] px-3 py-2">
                 <span className="text-[#0effd3] text-xs font-semibold whitespace-nowrap">
                   Scenario
                 </span>
@@ -178,7 +183,7 @@ async function handleSubmit() {
                 {scenario.tags.map((tag) => (
                   <div
                     key={tag}
-                    className="bg-[rgba(34,197,94,0.07)] border border-[rgba(34,197,94,0.25)] rounded-[3px] px-2.5 py-1.5"
+                    className="bg-[rgba(34,197,94,0.07)] border border-[rgba(255,255,255,0.4)] rounded-[3px] px-2.5 py-1.5"
                   >
                     <span className="text-[#0effd3] text-xs font-semibold">{tag}</span>
                   </div>
@@ -204,7 +209,7 @@ async function handleSubmit() {
               </div>
 
               {/* Email / Message Preview */}
-              <div className="backdrop-blur-[7px] bg-[rgba(255,255,255,0.07)] border border-[rgba(255,255,255,0.25)] rounded-[3px] shadow-[0px_8px_16px_0px_rgba(0,0,0,0.12)] p-5 flex flex-col gap-4">
+              <div className="backdrop-blur-[9px] bg-[rgba(7,26,44,0.75)] border border-[rgba(255,255,255,0.4)] rounded-[3px] shadow-[0px_12px_24px_0px_rgba(0,0,0,0.2)] p-6 flex flex-col gap-4 shrink-0">
                 {/* Message metadata */}
                 <div className="flex items-start justify-between text-[#00ffc8] text-base">
                   <div className="flex flex-col gap-1">
