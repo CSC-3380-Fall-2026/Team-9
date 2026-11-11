@@ -117,7 +117,7 @@ async function handleSubmit() {
         //if (item === 'Classes') navigate('/classes');
         //if (item === 'Forum') navigate('/forum');
         //if (item === 'Profile') navigate('/profile');
-        if (item === 'Progress') navigate('/progress');
+        if (item === 'Progress') navigate('/analytics');
         //if (item === 'Admin') navigate('/admin');
       }}
       className={`px-4 py-2.5 rounded-[3px] text-sm border leading-none transition-colors ${
