@@ -1,4 +1,11 @@
 package com._team9.backend.controller;
+import com._team9.backend.entity.Choice;
+import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.server.ResponseStatusException;
 
 import com._team9.backend.entity.Scenario;
 import com._team9.backend.repository.ScenarioRepository;
@@ -6,18 +13,81 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import com._team9.backend.entity.User;
+import com._team9.backend.repository.UserRepository;
+import com._team9.backend.service.ScenarioAttemptService;
+import java.security.Principal;
 
 @RestController
 public class ScenarioController {
 
-    private final ScenarioRepository scenarioRepository;
+   
+private final ScenarioRepository scenarioRepository;
+private final UserRepository userRepository;
+private final ScenarioAttemptService scenarioAttemptService;
 
-    public ScenarioController(ScenarioRepository scenarioRepository) {
-        this.scenarioRepository = scenarioRepository;
-    }
+public ScenarioController(
+        ScenarioRepository scenarioRepository,
+        UserRepository userRepository,
+        ScenarioAttemptService scenarioAttemptService) {
+
+    this.scenarioRepository = scenarioRepository;
+    this.userRepository = userRepository;
+    this.scenarioAttemptService = scenarioAttemptService;
+}
 
     @GetMapping("/api/scenarios")
     public List<Scenario> getAllScenarios() {
         return scenarioRepository.findAll();
     }
+
+    // teehee umm receives a selected answer and checks it against the backend....
+  
+@Transactional
+@PostMapping("/api/scenarios/{scenarioId}/submit")
+public SubmissionResult submitAnswer(
+        @PathVariable Long scenarioId,
+        @RequestBody SubmissionRequest request,
+        Principal principal) {
+
+        Scenario scenario = scenarioRepository.findById(scenarioId)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Scenario not found"));
+
+        if (request.choiceId() == null) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Choice ID is required");
+        }
+
+        // uhh make sure the choice belongs to this scenario.
+        Choice selectedChoice = scenario.getChoices().stream()
+                .filter(choice -> choice.getId().equals(request.choiceId()))
+                .findFirst()
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST, "Invalid choice for this scenario"));
+
+                              // Save the attempt only when the server has identified a user.
+        // Anonymous users can still receive answer feedback.
+        if (principal != null) {
+            User user = userRepository.findByEmail(principal.getName())
+                .orElseThrow(() -> new ResponseStatusException(
+                    HttpStatus.UNAUTHORIZED,
+                    "Authenticated user not found"
+                ));
+
+            scenarioAttemptService.saveAttempt(
+                user,
+                scenario,
+                selectedChoice
+            );
+        }
+        return new SubmissionResult(
+                selectedChoice.isSafe(),
+                selectedChoice.getFeedback()
+        );
+    }
+
+    public record SubmissionRequest(Long choiceId) {}
+
+    public record SubmissionResult(boolean safe, String feedback) {}
 }

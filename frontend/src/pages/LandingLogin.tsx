@@ -30,19 +30,11 @@ UPDATES ARE CONSTANT AND I ADD TO THIS
   Okat teaaaa it works right now just have to press login obvi tho once backen 
   is added user will actuall have to type in passwords.
 */
+import { useState, type FormEvent } from "react";
+import { login } from "../services/authService";
+import { useNavigate } from "react-router-dom";
 
-
-
-
-
-
-
-import { useNavigate } from 'react-router-dom'
-
-const assetPathPrefix = "/assets"
-
-
-
+const assetPathPrefix = "/assets";
 
 // This the main area of CyberSense platform that is shown on the landing page.
 
@@ -63,10 +55,36 @@ const platformAreas = [
     name: "Community Forum",
     icon: `${assetPathPrefix}/867c2.svg`,
   },
-]
+];
 // Okay so this will allow this page to move between routes without reloading the site.
-export default function LandingLogin() { 
-    const navigate = useNavigate()
+export default function LandingLogin() {
+  const navigate = useNavigate();
+
+  const [loginError, setLoginError] = useState("");
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+
+  // Only navigate after the backend verifies the credentials.
+  async function handleLogin(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const email = String(formData.get("username") ?? "").trim();
+    const password = String(formData.get("password") ?? "");
+
+    setLoginError("");
+    setIsLoggingIn(true);
+
+    try {
+      await login(email, password);
+      navigate("/dashboard");
+    } catch (error) {
+      setLoginError(
+        error instanceof Error ? error.message : "Unable to log in.",
+      );
+    } finally {
+      setIsLoggingIn(false);
+    }
+  }
   return (
     <main className="relative flex min-h-dvh flex-col overflow-hidden bg-[#071a2c]">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
@@ -75,15 +93,11 @@ export default function LandingLogin() {
           className="absolute inset-0 size-full max-w-none object-cover"
           src={`${assetPathPrefix}/47d8c.png`}
         />
-        <div className="absolute inset-0 bg-black/18" />
+        <div className="absolute inset-0 backdrop-blur-[2px]" />
       </div>
 
-      <nav className="relative z-10 flex h-[72px] shrink-0 items-center border-b border-[#a7a7a3] bg-white px-6 sm:px-10 lg:px-14">
-        <div className="flex items-center gap-3">
-          <div
-            aria-hidden="true"
-            className="size-8 rounded-[3px] border border-[#202020] bg-[#e5e5e2]"
-          />
+      <nav className="bg-white/55 backdrop-blur-[9px] relative z-10 flex h-[72px] shrink-0 items-center border-b border-[#a7a7a3] bg-white px-6 sm:px-10 lg:px-14">
+        <div>
           <span className="font-['Inter:Bold'] text-base font-bold text-[#202020]">
             CyberSense
           </span>
@@ -95,11 +109,13 @@ export default function LandingLogin() {
           <h1 className="font-['Inter:Bold'] text-[44px] leading-normal font-bold sm:text-[56px]">
             CyberSense
           </h1>
-          <p className="font-['Inter:Semi_Bold'] text-xl leading-normal font-semibold">
+          <p className="font-['Inter:Semi_Bold'] text-xl text-white leading-normal font-semibold">
             Human-Centered Cybersecurity Training
           </p>
-          <p className="font-['Inter:Regular'] text-base leading-6 font-normal">
-           Learn how attackers use both technical tricks and human behavior to manipulate users, and how to recognize the warning signs before responding.
+          <p className="font-['Inter:Regular'] text-white text-base leading-6 font-normal">
+            Learn how attackers use both technical tricks and human behavior to
+            manipulate users, and how to recognize the warning signs before
+            responding.
           </p>
         </div>
       </section>
@@ -108,16 +124,18 @@ export default function LandingLogin() {
         <div className="flex w-full items-start gap-6 max-lg:flex-col">
           <div className="w-[420px] shrink-0 max-lg:w-full">
             <form
-            //after login is submitted sends user to dashboard teehee.
+              //after login is submitted sends user to dashboard teehee.
               className="flex w-full flex-col items-start gap-4 rounded-[3px] border border-white bg-[rgba(7,26,44,0.75)] p-6"
-             onSubmit={(event) => {
-               event.preventDefault()
-                     navigate('/dashboard')
-                                            }}
+              onSubmit={handleLogin}
             >
               <h2 className="font-['Inter:Bold'] text-2xl leading-normal font-bold text-[#00ffc8]">
                 Log In
               </h2>
+              {loginError && (
+                <p role="alert" className="text-sm text-red-400">
+                  {loginError}
+                </p>
+              )}
 
               <label className="flex w-full flex-col gap-2 font-['Inter:Semi_Bold'] text-sm leading-normal font-semibold text-[#00ffc8]">
                 Email or Username
@@ -144,8 +162,9 @@ export default function LandingLogin() {
               <button
                 className="h-12 w-full cursor-pointer rounded-[3px] bg-[#363636] font-['Inter:Bold'] text-sm font-bold text-white transition-colors hover:bg-[#464646] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00ffc8]"
                 type="submit"
+                disabled={isLoggingIn}
               >
-                Log In
+                {isLoggingIn ? "Logging In..." : "Log In"}
               </button>
 
               <a
@@ -159,12 +178,13 @@ export default function LandingLogin() {
                 <span className="font-['Inter:Regular'] font-normal">
                   New user?
                 </span>
-                <a
-                  className="font-['Inter:Bold'] font-bold hover:underline"
-                  href="#create-account"
+                {/* changed this to a button and add onClick to navigate to create account page - Pape */}
+                <span
+                  className="font-['Inter:Bold'] font-bold hover:underline cursor-pointer"
+                  onClick={() => navigate("/CreateAccount")}
                 >
                   Create Account
-                </a>
+                </span>
               </p>
             </form>
           </div>
@@ -174,9 +194,15 @@ export default function LandingLogin() {
               <h2 className="font-['Inter:Bold'] text-2xl leading-normal font-bold">
                 About CyberSense
               </h2>
-              <p className="font-['Inter:Regular'] text-base leading-6 font-normal">
-               CyberSense is an interactive cybersecurtity awareness platform focused on both technical threats and the human factors behind social engineering. Users work through realsitic scenarios involving phishing, impersonation, urgency, authority,
-               suspicious links, credential requests, and other manipulation techniques.After each scenario, CyberSense explains the warning signs, identifies the human and technical cues involved, and helps users track patterns in their performance over time.
+              <p className="text-white font-['Inter:Regular'] text-base leading-6 font-normal">
+                CyberSense is an interactive cybersecurtity awareness platform
+                focused on both technical threats and the human factors behind
+                social engineering. Users work through realsitic scenarios
+                involving phishing, impersonation, urgency, authority,
+                suspicious links, credential requests, and other manipulation
+                techniques.After each scenario, CyberSense explains the warning
+                signs, identifies the human and technical cues involved, and
+                helps users track patterns in their performance over time.
               </p>
             </article>
 
@@ -204,5 +230,5 @@ export default function LandingLogin() {
         </div>
       </section>
     </main>
-  )
+  );
 }
