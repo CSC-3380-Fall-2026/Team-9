@@ -27,7 +27,10 @@
   ],
   "humanFactors": [
     "Urgency",
-    "Fear of loss",
-    "Authority (appears to be from the bank)"
+    "Social Proof",
+    "Authority ",
+    "Institutional Trust",
+    "Familiarity" 
+  
   ]
 }
