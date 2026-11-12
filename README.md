@@ -1,10 +1,11 @@
-# [Name of the Project] : Team 9 
+# [CyberSense] : Team 9 
 # Members
-Project Manager: Triston Blue (thxRealBLue)\
+Quality Assurance Tester: Triston Blue (thxRealBLue)\
+Quality Assurance Tester: Kauai Cooper (spac3_W0rm)\
 Communications Lead: Taliyah Applewhite ([taliyahjulia])\
 Git Master: Pape Diagne (pape-stem-lsu)\
 Design Lead: Krishna Conerly (KrishnaV193)\
-Quality Assurance Tester: Marie OConnell (moconnell556)
+Project Manager: Marie OConnell (moconnell556)\
 
 # About Our Software
 
@@ -13,7 +14,8 @@ An interactive website that focuses on both the technical and social factors beh
 ## Platforms Tested on
 - TBD
 # Important Links
-Kanban Board: https://claude.ai/artifact/Td3VYJVZisfhmmqjaTzmMr\              
+Kanban Board: https://claude.ai/artifact/Td3VYJVZisfhmmqjaTzmMr\
+https://csc3380-team9.atlassian.net/jira/software/projects/KAN/list?jql=project%20%3D%20KAN%20ORDER%20BY%20cf%5B10019%5D%20ASC
 Designs: [link]\
 Styles Guide(s): [link]
 
