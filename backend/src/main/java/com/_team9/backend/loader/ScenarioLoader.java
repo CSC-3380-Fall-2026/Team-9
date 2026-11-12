@@ -1,14 +1,18 @@
+
 package com._team9.backend.loader;
 
 import com._team9.backend.entity.Choice;
 import com._team9.backend.entity.Scenario;
 import com._team9.backend.repository.ScenarioRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
+import java.util.Objects;
 
 @Component
 public class ScenarioLoader implements CommandLineRunner {
@@ -22,22 +26,51 @@ public class ScenarioLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        // don't reload if scenarios are already in the database
-        if (scenarioRepository.count() > 0) {
-            System.out.println("Scenarios already loaded, skipping template load.");
-            return;
-        }
 
-        try (InputStream in = new ClassPathResource("scenarios/template.json").getInputStream()) {
-            Scenario scenario = objectMapper.readValue(in, Scenario.class);
+        // Automatically find every JSON scenario file
+        PathMatchingResourcePatternResolver resolver =
+                new PathMatchingResourcePatternResolver();
 
-            // JSON can't set this back-reference on its own, has to be done manually
-            for (Choice choice : scenario.getChoices()) {
-                choice.setScenario(scenario);
+        Resource[] files = resolver.getResources(
+                "classpath*:scenarios/*.json"
+        );
+
+        for (Resource file : files) {
+
+            try (InputStream in = file.getInputStream()) {
+
+                Scenario scenario =
+                        objectMapper.readValue(in, Scenario.class);
+
+                // Connect each choice to its scenario
+                for (Choice choice : scenario.getChoices()) {
+                    choice.setScenario(scenario);
+                }
+
+                // Check whether this scenario already exists
+                boolean alreadyExists = scenarioRepository.findAll()
+                        .stream()
+                        .anyMatch(existing ->
+                                Objects.equals(
+                                        existing.getTitle(),
+                                        scenario.getTitle()
+                                )
+                        );
+
+                if (alreadyExists) {
+                    System.out.println(
+                            "Already exists: " + scenario.getTitle()
+                    );
+                    continue;
+                }
+
+                // Save new scenario
+                scenarioRepository.save(scenario);
+
+                System.out.println(
+                        "Loaded scenario: " + scenario.getTitle()
+                );
             }
-
-            scenarioRepository.save(scenario);
-            System.out.println("Loaded template scenario: " + scenario.getTitle());
         }
     }
 }

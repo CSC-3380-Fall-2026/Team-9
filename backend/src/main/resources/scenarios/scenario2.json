@@ -1,0 +1,35 @@
+ {
+ "type": "smishing_sms",
+  "title": "Delivery Attemp Failed: Action Required",
+  "message": "From: DeliverySupport@shipping-alert.com\n\nYour package delivery was unsuccessful due to an incomplete shipping address. Your package is currently being held at our facility.\n\nPlease update your delivery information within 12 hours to avoid having your package returned to the sender.\n\nUpdate Delivery Address: [Suspicious Link]\n\nThank you,\nDelivery Support Team",
+  "choices": [
+    {
+      "text": "Click the link to provide your address details to schedule a new delivery date.",
+      "safe": false,
+      "feedback": "This could expose your personal information. Legitimate shipping companies should never ask you to verify your identity through an urgent SMS link."
+    },
+    {
+      "text": "Visit the company's website and provide your tracking information to check your order status directly through the official shipping company's website or app.",
+      "safe": true,
+      "feedback": "Correct. Going directly to the official site/app instead of clicking email links avoids phishing links entirely."
+    },
+    {
+      "text": "Reply to the message asking them for specifics on the delivery information.",
+      "safe": false,
+      "feedback": "Replying confirms your who you are and that your phone number is active and monitored, which attackers can use for future targeting."
+    }
+  ],
+  "warningSigns": [
+    "Unexpected delivery notification",
+    "Suspicious sender or unfamiliar phone number",
+    "Link directs users to an unofficial shipping website",
+    "Requests personal information through a text message"  ],
+  "humanFactors": [
+    "Urgency",
+    "Social Proof",
+    "Authority ",
+    "Institutional Trust",
+    "Familiarity" 
+  
+  ]
+}
