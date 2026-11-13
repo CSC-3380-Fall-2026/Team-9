@@ -20,7 +20,7 @@ public class ForumPost {
     private User author;
 
     @Column(nullable = false, length = 1000)
-    private String content;
+    private String body;
 
     @Column(nullable = false)
     private Instant createdAt = Instant.now();
@@ -30,14 +30,14 @@ public class ForumPost {
     private boolean hidden = false;
 
     public ForumPost() {}
-
+    
+    public String getBody() { return body; }
+    public void setBody(String body) { this.body = body; }
     public Long getId() { return id; }
     public ForumThread getThread() { return thread; }
     public void setThread(ForumThread thread) { this.thread = thread; }
     public User getAuthor() { return author; }
     public void setAuthor(User author) { this.author = author; }
-    public String getContent() { return content; }
-    public void setContent(String content) { this.content = content; }
     public Instant getCreatedAt() { return createdAt; }
     public boolean isHidden() { return hidden; }
     public void setHidden(boolean hidden) { this.hidden = hidden; }

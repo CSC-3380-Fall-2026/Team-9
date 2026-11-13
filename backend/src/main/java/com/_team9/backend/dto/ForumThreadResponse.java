@@ -6,7 +6,7 @@ import java.time.Instant;
 public record ForumThreadResponse(
     Long id,
     String title,
-    String author,
+    String authorName,
     Instant createdAt
 ) {
 
