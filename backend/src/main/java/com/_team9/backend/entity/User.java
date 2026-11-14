@@ -28,9 +28,10 @@ public class User {
     private String passwordHash;
 
     // Stores the user's chosen username/display name
-     @Column(nullable = false, unique = true)
-   private String username;
+    @Column(nullable = false)
+    private String username;
 
+    public User() {}
 
     public User(String email, String passwordHash, String username) {
         this.email = email;

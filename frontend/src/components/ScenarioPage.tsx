@@ -115,7 +115,7 @@ async function handleSubmit() {
         if (item === 'Dashboard') navigate('/dashboard');
         if (item === 'Training') navigate('/training');
         //if (item === 'Classes') navigate('/classes');
-        //if (item === 'Forum') navigate('/forum');
+        if (item === 'Forum') navigate('/forum');
         //if (item === 'Profile') navigate('/profile');
         if (item === 'Progress') navigate('/analytics');
         //if (item === 'Admin') navigate('/admin');
