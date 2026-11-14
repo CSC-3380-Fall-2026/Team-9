@@ -110,20 +110,29 @@ export function convertBackendScenario(
 
 
 // Gets the requested scenario from the backend and translates it.
+
 export async function getScenarioForTraining(
   scenarioId?: string
 ): Promise<Scenario | undefined> {
   const scenarios = await getScenarios()
 
-  if (scenarios.length === 0) {
+  if (scenarios.length === 0 || !scenarioId) {
     return undefined
   }
 
   const numericId = Number(scenarioId)
 
-  const backendScenario = Number.isNaN(numericId)
-    ? scenarios[0]
-    : scenarios.find((scenario) => scenario.id === numericId) ?? scenarios[0]
+  if (Number.isNaN(numericId)) {
+    return undefined
+  }
+
+  const backendScenario = scenarios.find(
+    (scenario) => scenario.id === numericId
+  )
+
+  if (!backendScenario) {
+    return undefined
+  }
 
   return convertBackendScenario(backendScenario)
 }
