@@ -124,7 +124,7 @@ export default function Dashboard() {
                 if (link === "Training") navigate("/training");
                 //if (link === "Classes") navigate("/classes");
                 //if (link === "Forum") navigate("/forum");
-            if (link === "Profile") navigate("/account");
+                if (link === "Profile") navigate("/account");
                 if (link === "Progress") navigate("/analytics");
                 //if (link === "Admin") navigate("/admin");
               }}
