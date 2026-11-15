@@ -24,6 +24,7 @@
  * added import for CreateAccount page and route for it
  * 
  */
+import AccountSettings from "./pages/AccountSettings";
 import { getScenarioForTraining } from "./services/scenarioService";
 import { useEffect, useState } from "react";
 import { Routes, Route, useParams } from "react-router-dom";
@@ -87,6 +88,7 @@ export default function App() {
 
   {/* Pages that require login */}
   <Route element={<ProtectedRoute />}>
+  <Route path="/account" element={<AccountSettings />} />
     <Route path="/dashboard" element={<Dashboard />} />
     <Route path="/training" element={<ScenarioLibrary />} />
     <Route
