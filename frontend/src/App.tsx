@@ -34,6 +34,9 @@ import ScenarioLibrary from "./pages/ScenarioLibrary";
 import ScenarioPage from "./components/ScenarioPage";
 import CreateAccount from "./pages/CreateAccount";
 import ProgressAnalytics from "./pages/ProgressAnalytics";
+import ForumPage from "./pages/ForumPage";
+import NewThreadPage from "./pages/NewThreadPage";
+import ThreadPage from "./pages/ThreadPage";
 
 import type { Scenario } from "./types/scenario";
 
@@ -84,16 +87,21 @@ export default function App() {
   {/* Public pages */}
   <Route path="/" element={<LandingLogin />} />
   <Route path="/CreateAccount" element={<CreateAccount />} />
+  <Route path="/forum" element={<ForumPage />} />
+
 
   {/* Pages that require login */}
   <Route element={<ProtectedRoute />}>
     <Route path="/dashboard" element={<Dashboard />} />
     <Route path="/training" element={<ScenarioLibrary />} />
+    <Route path="/forum/:id" element={<ThreadPage />} />
     <Route
       path="/training/:scenarioId"
       element={<TrainingScenario />}
     />
     <Route path="/analytics" element={<ProgressAnalytics />} />
+    <Route path="/forum/new" element={<NewThreadPage />} />
+  
   </Route>
 </Routes>
 

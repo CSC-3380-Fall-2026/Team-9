@@ -123,7 +123,7 @@ export default function Dashboard() {
                 if (link === "Dashboard") navigate("/dashboard");
                 if (link === "Training") navigate("/training");
                 //if (link === "Classes") navigate("/classes");
-                //if (link === "Forum") navigate("/forum");
+                if (link === "Forum") navigate("/forum");
                 //if (link === "Profile") navigate("/profile");
                 if (link === "Progress") navigate("/analytics");
                 //if (link === "Admin") navigate("/admin");
