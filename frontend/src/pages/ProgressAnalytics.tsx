@@ -15,9 +15,8 @@ interface HumanFactorSummary {
   unsafeAnswers: number;
   susceptibilityPercentage: number;
 }
-
 const panel =
-  "rounded border border-cyan-300/30 bg-[#071a2c]/85 p-5 shadow-xl backdrop-blur-md";
+  "rounded-[3px] border border-white/80 bg-[#071a2c]/75 p-5";
 
 function formatFactor(name: string) {
   return name.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
@@ -110,7 +109,7 @@ export default function ProgressAnalytics() {
               <h1 className="mt-2 text-3xl font-bold">
                 Progress &amp; Analytics
               </h1>
-              <p className="mt-2 max-w-3xl text-white/70 text-sm">
+              <p className="mt-1 text-sm text-white">
                 Track your cybersecurity training and identify the social
                 engineering techniques that affect you most.
               </p>
@@ -148,7 +147,7 @@ export default function ProgressAnalytics() {
                 <h2 className="text-xl font-bold text-[#00ffc8]">
                   Overall Progress Summary
                 </h2>
-                <p className="mt-1 text-sm text-white/70">
+                <p className="mt-1 text-sm text-white">
                   Your recorded training performance.
                 </p>
 
@@ -190,7 +189,7 @@ export default function ProgressAnalytics() {
                 <h2 className="text-xl font-bold text-[#00ffc8]">
                   Human-Factor Performance
                 </h2>
-                <p className="mt-1 text-sm text-white/70">
+                <p className="mt-1 text-sm text-white">
                   How often you recognize different influence techniques.
                 </p>
 
@@ -225,7 +224,7 @@ export default function ProgressAnalytics() {
                           />
                         </div>
 
-                        <p className="mt-2 text-xs text-white/70">
+                        <p className="mt-1 text-sm text-white">
                           Based on {factor.totalAttempts} recorded attempts
                         </p>
                       </div>
@@ -240,7 +239,7 @@ export default function ProgressAnalytics() {
                 <h2 className="text-xl font-bold text-[#00ffc8]">
                   Scenario Type Performance
                 </h2>
-                <p className="mt-3 text-sm text-white/70">
+                <p className="mt-1 text-sm text-white">
                   Performance by scenario type will appear once
                   that analytics endpoint is connected.
                 </p>
@@ -250,7 +249,7 @@ export default function ProgressAnalytics() {
                 <h2 className="text-xl font-bold text-[#00ffc8]">
                   Recent Scenario Results
                 </h2>
-                <p className="mt-3 text-sm text-white/70">
+                <p className="mt-1 text-sm text-white">
                   Your recent training history will appear here
                   after the history API is implemented.
                 </p>
