@@ -1,0 +1,35 @@
+
+{
+  "type": "trust_impersonation",
+  "title": "Hey! I Need a Quick Favor",
+  "message": "From: Your Friend\nSubject: Group Project Help\n\nHey!\n\nI'm having trouble accessing my university account right now. I need you to log into this link and download a document for our group project.\n\nIt's due soon, so I would really appreciate your help!\n\nThanks!",
+  "choices": [
+    {
+      "text": "Click the link and download the document because the message came from your friend.",
+      "safe": false,
+      "feedback": "Familiar names and accounts can be impersonated or compromised. Never assume a request is legitimate just because it appears to come from someone you know."
+    },
+    {
+      "text": "Contact your friend through another communication method to confirm the request.",
+      "safe": true,
+      "feedback": "Correct! Confirming unusual requests through another communication channel helps prevent impersonation attacks."
+    },
+    {
+      "text": "Forward the link to your group members to see if they can access it.",
+      "safe": false,
+      "feedback": "Forwarding suspicious links can expose other people to malicious websites or downloads. Verify the request first."
+    }
+  ],
+  "warningSigns": [
+    "Unexpected request to access an unfamiliar link",
+    "Pressure related to an approaching deadline",
+    "Request involving university account access",
+    "No confirmation through another communication channel"
+  ],
+  "humanFactors": [
+    "Trust",
+    "Familiarity",
+    "Reciprocity",
+    "Urgency"
+  ]
+}

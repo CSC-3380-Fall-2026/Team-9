@@ -1,0 +1,35 @@
+
+{
+  "type": "authority_impersonation",
+  "title": "Important: IT Department Security Update",
+  "message": "From: IT Support\nSubject: Mandatory Security Update\n\nHello Student,\n\nThe university IT department is performing an emergency security update. To prevent your account from being temporarily disabled, please provide your university login credentials to our support team immediately.\n\nFailure to comply may result in loss of access to university resources.\n\nThank you,\nUniversity IT Department",
+  "choices": [
+    {
+      "text": "Contact the university IT department through its official contact information to verify the request.",
+      "safe": true,
+      "feedback": "Correct. Always independently verify unusual requests, even when they appear to come from someone in authority."
+    },
+    {
+      "text": "Forward your credentials to another student to see if they received the same request.",
+      "safe": false,
+      "feedback": "Sharing your credentials creates additional security risks. Verify the request directly with official university support."
+    },
+    {
+      "text": "Provide your login credentials because the request came from IT Support.",
+      "safe": false,
+      "feedback": "Incorrect. Attackers often impersonate authority figures to make people feel obligated to follow instructions. Legitimate IT departments should never ask for your password."
+    }
+  ],
+  "warningSigns": [
+    "Request for confidential login credentials",
+    "Threat of losing access to university resources",
+    "Unverified identity of the supposed IT employee",
+    "Pressure to comply without independent verification"
+  ],
+  "humanFactors": [
+    "Authority",
+    "Obedience",
+    "Fear",
+    "Institutional Trust"
+  ]
+}
