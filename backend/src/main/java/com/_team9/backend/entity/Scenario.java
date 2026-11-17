@@ -32,10 +32,8 @@ public class Scenario {
 
     @Column(nullable = false)
     private String title;
-
     // the email/text/login page content the player actually sees
-    @Lob
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String message;
 
     @JsonManagedReference
