@@ -28,9 +28,9 @@ public class Choice {
     private boolean safe;
 
     // shown back to the player after they pick this choice
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String feedback;
-
+    
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "scenario_id")
