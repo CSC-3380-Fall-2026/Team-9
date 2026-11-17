@@ -4,7 +4,7 @@ import com._team9.backend.entity.Choice;
 import com._team9.backend.entity.Scenario;
 import com._team9.backend.repository.ScenarioRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -24,6 +24,7 @@ public class ScenarioLoader implements CommandLineRunner {
     }
 
     @Override
+    @Transactional
     public void run(String... args) throws Exception {
 
         // Automatically find every JSON scenario file
@@ -47,7 +48,6 @@ public class ScenarioLoader implements CommandLineRunner {
                 }
 
                 // Check whether this scenario already exists
-// Check whether this scenario already exists
                 Optional<Scenario> existingOpt = scenarioRepository.findAll()
                         .stream()
                         .filter(existing
