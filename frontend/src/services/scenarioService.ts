@@ -24,6 +24,11 @@
 import { getCsrfToken } from "./csrfService";
 import type { Scenario } from '../types/scenario'
 
+
+function formatHumanFactor(factor: string): string {
+  return factor.replace(/\s*\([^)]*\)\s*$/, "").trim();
+}
+
 export type BackendChoice = {
   id: number
   text: string
@@ -87,7 +92,7 @@ export function convertBackendScenario(
     description:
       'Review the scenario carefully and choose the safest response.',
 
-    tags: backendScenario.humanFactors,
+    tags: backendScenario.humanFactors.map(formatHumanFactor),
 
     message: {
       from: fromLine.replace('From:', '').trim(),
@@ -103,7 +108,7 @@ export function convertBackendScenario(
 
     humanFactors: backendScenario.humanFactors.map((factor, index) => ({
       id: `factor-${index + 1}`,
-      label: factor,
+   label: formatHumanFactor(factor),
     })),
   }
 }

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Michroma&display=swap');
 
 @font-face {
   font-family: "Inter:Bold";
@@ -39,5 +40,348 @@
   button,
   input {
     font: inherit;
+  }
+}
+
+/* CyberSense customizable color themes */
+
+:root {
+  --cyber-accent: #00ffc8;
+  --cyber-text: #ffffff;
+}
+
+/* Neon pink */
+:root[data-cyber-theme="pink"] {
+  --cyber-accent: #ff79cd;
+}
+
+/* Neon purple */
+:root[data-cyber-theme="purple"] {
+  --cyber-accent: #c29dff;
+}
+
+/* Neon red */
+:root[data-cyber-theme="red"] {
+  --cyber-accent: #ff657a;
+}
+
+/* Neon blue */
+:root[data-cyber-theme="blue"] {
+  --cyber-accent: #46baff;
+}
+
+/* Matrix green */
+:root[data-cyber-theme="green"] {
+  --cyber-accent: #55ff91;
+}
+
+/* Electric yellow */
+:root[data-cyber-theme="yellow"] {
+  --cyber-accent: #ffe66b;
+}
+:root[data-cyber-theme="orange"] {
+  --cyber-accent: #ff8c00;
+}
+/* CyberSense neon text glow */
+
+.cyber-neon-text {
+  color: var(--cyber-accent);
+
+  text-shadow:
+    0 0 2px rgba(255, 255, 255, 0.95),
+    0 0 5px var(--cyber-accent),
+    0 0 10px var(--cyber-accent),
+    0 0 20px var(--cyber-accent),
+    0 0 35px var(--cyber-accent);
+}
+
+/* Softer glow for smaller labels */
+
+.cyber-neon-soft {
+  color: var(--cyber-accent);
+
+  text-shadow:
+    0 0 4px var(--cyber-accent),
+    0 0 10px var(--cyber-accent);
+}
+.cyber-main-title {
+  font-family: "Bruno Ace SC", "Michroma", sans-serif;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  color: var(--cyber-accent);
+  text-shadow:
+    0 0 6px var(--cyber-accent),
+    0 0 12px var(--cyber-accent),
+    0 0 24px var(--cyber-accent),
+    0 0 40px color-mix(in srgb, var(--cyber-accent) 70%, white 30%);
+}
+/* Futuristic section headings */
+.cyber-section-title {
+  font-family: "Orbitron", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--cyber-accent);
+}
+/* Local cyberpunk display font */
+@font-face {
+  font-family: "NeonCut";
+  src: url("/fonts/neoncut.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Main neon page titles */
+.cyber-display {
+  font-family: "Bruno Ace SC", "Orbitron", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.025em;
+}
+
+/* Theme-colored neon progress bars  UwU*/
+
+.cyber-neon-bar {
+  background: var(--cyber-accent);
+  border-radius: 9999px;
+
+  box-shadow:
+    0 0 3px 1px white,
+    0 0 8px 2px var(--cyber-accent),
+    0 0 18px 4px var(--cyber-accent),
+    0 0 32px 6px var(--cyber-accent);
+
+  filter: brightness(1.2);
+}
+
+
+.cyber-body-text {
+  font-family: "Exo 2", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+}
+/* Glowing glass panels */
+.cyber-panel-glow {
+  box-shadow:
+    0 0 5px rgba(255, 255, 255, 0.15),
+    0 0 12px rgba(255, 255, 255, 0.06);
+
+  transition: box-shadow 0.3s ease;
+}
+
+.cyber-panel-glow:hover {
+  box-shadow:
+    0 0 10px rgba(255, 255, 255, 0.75),
+    0 0 25px rgba(255, 255, 255, 0.4),
+    0 0 45px rgba(255, 255, 255, 0.15);
+}
+
+/* CyberSense dashboard navigation tiles */
+.cyber-dashboard-tile {
+  font-family: "Orbitron", sans-serif;
+  color: white;
+  border: 2px solid var(--cyber-accent);
+  background-color: #102a40;
+
+  background-image:
+    repeating-linear-gradient(
+      135deg,
+      rgba(255,255,255,0.06) 0px,
+      rgba(255,255,255,0.06) 1px,
+      transparent 1px,
+      transparent 18px
+    ),
+    radial-gradient(
+      ellipse at top,
+      color-mix(in srgb, var(--cyber-accent) 28%, transparent),
+      transparent 75%
+    );
+
+  box-shadow:
+    0 0 12px 2px var(--cyber-accent),
+    0 0 24px var(--cyber-accent);
+
+  transition: box-shadow 0.3s ease;
+}
+
+.cyber-dashboard-tile:hover,
+.cyber-dashboard-tile:focus-visible {
+  box-shadow:
+    0 0 20px 3px var(--cyber-accent),
+    0 0 40px var(--cyber-accent);
+}
+
+/* Soft neon glow for dashboard statistics */
+
+.cyber-stat-glow {
+  color: var(--cyber-accent);
+
+  text-shadow:
+    0 0 2px rgba(255, 255, 255, 0.8),
+    0 0 6px var(--cyber-accent),
+    0 0 12px var(--cyber-accent),
+    0 0 20px var(--cyber-accent);
+}
+/* Readable neon text for simulated messages */
+.cyber-message-text {
+  font-family: "Exo 2", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  color: var(--cyber-accent);
+
+  text-shadow:
+    0 0 3px color-mix(in srgb, var(--cyber-accent) 45%, transparent),
+    0 0 8px color-mix(in srgb, var(--cyber-accent) 20%, transparent);
+}
+
+/* Animated neon progress bars */
+@keyframes cyber-bar-fill {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.cyber-neon-bar {
+  transform-origin: left center;
+  animation: cyber-bar-fill 1.5s
+    cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Accessibility: respect reduced-motion settings */
+@media (prefers-reduced-motion: reduce) {
+  .cyber-neon-bar {
+    animation: none;
+  }
+}
+
+/* Scenario page entrance */
+@keyframes cyber-scenario-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Scenario page exit */
+@keyframes cyber-scenario-exit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+
+.cyber-scenario-enter {
+  animation: cyber-scenario-enter 0.65s ease-out both;
+}
+
+.cyber-scenario-exit {
+  animation: cyber-scenario-exit 0.45s ease-in both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cyber-scenario-enter,
+  .cyber-scenario-exit {
+    animation: none;
+  }
+}
+
+/* Scenario Library glass card entrance */
+@keyframes cyber-library-card-enter {
+  from {
+    opacity: 0;
+    translate: 0 22px;
+    filter: blur(5px);
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+    filter: blur(0);
+  }
+}
+
+.cyber-library-card-enter {
+  animation: cyber-library-card-enter 0.7s ease-out backwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cyber-library-card-enter {
+    animation: none;
+  }
+}
+/* Landing/Login intro animation */
+
+@keyframes cyber-title-ignite {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+    filter: blur(10px) brightness(0.4);
+  }
+
+  35% {
+    opacity: 1;
+    transform: scale(1.05);
+    filter: blur(0) brightness(1.5);
+  }
+
+  48% {
+    opacity: 0.6;
+  }
+
+  58% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0) brightness(1);
+  }
+}
+@keyframes cyber-intro-exit {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/*Landing login reveal UwU*/
+@keyframes cyber-page-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+    filter: blur(6px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
   }
 }

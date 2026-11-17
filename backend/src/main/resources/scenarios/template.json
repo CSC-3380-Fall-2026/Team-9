@@ -1,6 +1,6 @@
 {
   "type": "phishing_email",
-  "title": "Urgent: Your Account Will Be Suspended",
+  "title": "Urgent: Your Account Will Be Suspended !!!",
   "message": "From: security@yourbank-support.com\nSubject: URGENT - Account Suspension Notice\n\nDear Customer,\n\nWe detected unusual activity on your account. Click the link below within 24 hours to verify your identity or your account will be permanently suspended.\n\n[Verify My Account Now]\n\nThank you,\nSecurity Team",
   "choices": [
     {

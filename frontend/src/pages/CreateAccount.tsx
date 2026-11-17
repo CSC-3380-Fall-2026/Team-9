@@ -63,22 +63,22 @@ const res = await fetch("/api/users/register", {
                     className="absolute inset-0 size-full max-w-none object-cover"
                     src={`${assetPathPrefix}/47d8c.png`}
                 />
-                <div className="absolute inset-0 bg-[#071a2c]/80" />
+               <div className="absolute inset-0 bg-[rgba(7,26,44,0.75)] backdrop-blur-[2px]" />
             </div>
 
-            <nav className="bg-white/55 backdrop-blur-[9px]relative z-10 flex h-[72px] shrink-0 items-center border-b border-[#a7a7a3] bg-white px-6 sm:px-10 lg:px-14">
+         <nav className="relative z-10 flex h-[72px] shrink-0 items-center rounded-none border-2 border-white/90 bg-white/15 px-4 py-2 text-white font-semibold backdrop-blur-2xl shadow-[inset_0_0_12px_rgba(255,255,255,0.12),0_0_8px_var(--cyber-accent)] transition-all duration-300 hover:-translate-y-1 hover:bg-white/25 hover:shadow-[0_0_18px_3px_var(--cyber-accent),0_0_35px_var(--cyber-accent)]">
                 <div>
-                    <span className="font-['Inter:Bold'] text-base font-bold text-[#202020]">
+                    <span className="cyber-display text-base font-bold text-[var(--cyber-accent)] transition-all duration-300 hover:drop-shadow-[0_0_15px_var(--cyber-accent)]">
                         CyberSense
                     </span>
                 </div>
             </nav>
             <section className="relative flex min-h-[200px] shrink-0 items-start justify-center px-6 pb-14 pt-[72px] text-center sm:px-10 lg:px-14">
                 <div className="flex w-full max-w-[760px] flex-col items-center gap-4 text-[#00ffc8]">
-                    <h1 className="font-['Inter:Bold'] text-[44px] leading-normal font-bold sm:text-[56px]">
+                    <h1 className="cyber-main-title text-[44px] sm:text-[56px] leading-tight">
                         CyberSense
                     </h1>
-                    <p className="font-['Inter:Semi_Bold'] text-xl leading-normal font-semibold">
+                    <p className="font-['Orbitron'] text-xl font-semibold leading-normal text-white drop-shadow-[0_0_4px_rgba(255,255,255,0.35)]">
                         Create an account 
                     </p>
                 </div>
@@ -86,10 +86,10 @@ const res = await fetch("/api/users/register", {
             <section className="relative z-10 flex flex-1 items-start justify-center px-6 pb-20 sm:px-10 lg:px-14">
                 <form
                     onSubmit={handleSubmit}
-                    className="flex w-full max-w-[420px] flex-col gap-4 rounded-[6px] border border-[#a7a7a3] bg-white p-8"
+                    className="flex w-full max-w-[420px] flex-col gap-4 rounded-[3px] border border-white/80 bg-[rgba(7,26,44,0.75)] p-8 shadow-[0_0_5px_var(--cyber-accent)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_3px_var(--cyber-accent),0_0_45px_var(--cyber-accent)]"
                 >
                     <div className="flex flex-col gap-1">
-                        <label htmlFor="username" className="font-['Inter:Semi_Bold'] text-sm font-semibold text-[#202020]">
+                        <label htmlFor="username" className="text-sm font-semibold cyber-section-title">
                             Username
                         </label>
                         <input
@@ -98,12 +98,12 @@ const res = await fetch("/api/users/register", {
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             required
-                            className="rounded-[3px] border border-[#a7a7a3] px-3 py-2 text-[#202020] outline-none focus:border-[#071a2c]"
+                            className="h-12 w-full rounded-[3px] border border-white bg-[rgba(7,26,44,0.75)] p-[14px] cyber-body-text outline-none transition-all duration-300 hover:border-[var(--cyber-accent)] hover:shadow-[0_0_20px_3px_var(--cyber-accent),0_0_40px_var(--cyber-accent)] focus:border-[var(--cyber-accent)] focus:shadow-[0_0_20px_3px_var(--cyber-accent)]"
                         />
                     </div>
 
                     <div className="flex flex-col gap-1">
-                        <label htmlFor="email" className="font-['Inter:Semi_Bold'] text-sm font-semibold text-[#202020]">
+                        <label htmlFor="email" className="text-sm font-semibold cyber-section-title">
                             Email
                         </label>
                         <input
@@ -112,12 +112,12 @@ const res = await fetch("/api/users/register", {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
-                            className="rounded-[3px] border border-[#a7a7a3] px-3 py-2 text-[#202020] outline-none focus:border-[#071a2c]"
+                            className="h-12 w-full rounded-[3px] border border-white bg-[rgba(7,26,44,0.75)] p-[14px] cyber-body-text outline-none transition-all duration-300 hover:border-[var(--cyber-accent)] hover:shadow-[0_0_20px_3px_var(--cyber-accent),0_0_40px_var(--cyber-accent)] focus:border-[var(--cyber-accent)] focus:shadow-[0_0_20px_3px_var(--cyber-accent)]"
                         />
                     </div>
 
                     <div className="flex flex-col gap-1">
-                        <label htmlFor="password" className="font-['Inter:Semi_Bold'] text-sm font-semibold text-[#202020]">
+                        <label htmlFor="password" className="text-sm font-semibold cyber-section-title">
                             Password
                         </label>
                         <input
@@ -127,12 +127,12 @@ const res = await fetch("/api/users/register", {
                             onChange={(e) => setPassword(e.target.value)}
                             required
                             minLength={8}
-                            className="rounded-[3px] border border-[#a7a7a3] px-3 py-2 text-[#202020] outline-none focus:border-[#071a2c]"
+                            className="h-12 w-full rounded-[3px] border border-white bg-[rgba(7,26,44,0.75)] p-[14px] cyber-body-text outline-none transition-all duration-300 hover:border-[var(--cyber-accent)] hover:shadow-[0_0_20px_3px_var(--cyber-accent),0_0_40px_var(--cyber-accent)] focus:border-[var(--cyber-accent)] focus:shadow-[0_0_20px_3px_var(--cyber-accent)]"
                         />
                     </div>
 
                     <div className="flex flex-col gap-1">
-                        <label htmlFor="confirmPassword" className="font-['Inter:Semi_Bold'] text-sm font-semibold text-[#202020]">
+                        <label htmlFor="confirmPassword" className="text-sm font-semibold cyber-section-title">
                             Confirm password
                         </label>
                         <input
@@ -142,21 +142,55 @@ const res = await fetch("/api/users/register", {
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             required
                             minLength={8}
-                            className="rounded-[3px] border border-[#a7a7a3] px-3 py-2 text-[#202020] outline-none focus:border-[#071a2c]"
+                            className="h-12 w-full rounded-[3px] border border-white bg-[rgba(7,26,44,0.75)] p-[14px] cyber-body-text outline-none transition-all duration-300 hover:border-[var(--cyber-accent)] hover:shadow-[0_0_20px_3px_var(--cyber-accent),0_0_40px_var(--cyber-accent)] focus:border-[var(--cyber-accent)] focus:shadow-[0_0_20px_3px_var(--cyber-accent)]"
                         />
                     </div>
 
                     {error && (
-                        <p className="text-sm font-semibold text-red-600">{error}</p>
+                        <p
+  role="alert"
+  className="text-sm font-semibold text-red-300 cyber-body-text"
+  style={{ color: "#fca5a5" }}
+>
+  {error}
+</p>
                     )}
 
-                    <button
-                        type="submit"
-                        disabled={loading}
-                        className="mt-2 rounded-[3px] bg-[#071a2c] px-4 py-2 font-['Inter:Semi_Bold'] font-semibold text-[#00ffc8] disabled:opacity-60"
-                    >
+                  <button
+  type="submit"
+  disabled={loading}
+  className="mt-2 block w-full cursor-pointer rounded border-2 border-[var(--cyber-accent)] px-5 py-3 text-center text-base font-semibold text-white shadow-[0_0_12px_2px_var(--cyber-accent),0_0_24px_var(--cyber-accent)] transition-all duration-300 hover:shadow-[0_0_20px_3px_var(--cyber-accent),0_0_40px_var(--cyber-accent)] disabled:opacity-60"
+  style={{
+    fontFamily: '"Orbitron", sans-serif',
+    backgroundColor: "#102a40",
+    backgroundImage: `
+      repeating-linear-gradient(
+        135deg,
+        rgba(255,255,255,0.06) 0px,
+        rgba(255,255,255,0.06) 1px,
+        transparent 1px,
+        transparent 18px
+      ),
+      radial-gradient(
+        ellipse at top,
+        color-mix(in srgb, var(--cyber-accent) 28%, transparent),
+        transparent 75%
+      )
+    `,
+  }}
+>
                         {loading ? "Creating account..." : "Create account"}
                     </button>
+                    <p className="text-center text-sm cyber-section-title">
+  Already have an account?{" "}
+  <button
+    type="button"
+    onClick={() => navigate("/")}
+    className="cursor-pointer font-bold transition-all duration-300 hover:underline hover:drop-shadow-[0_0_12px_var(--cyber-accent)] hover:[text-shadow:0_0_8px_var(--cyber-accent),0_0_18px_var(--cyber-accent)]"
+  >
+    Log In
+  </button>
+</p>
                 </form>
             </section>
         </main>
