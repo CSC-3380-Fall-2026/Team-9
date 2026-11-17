@@ -78,7 +78,8 @@ function TrainingScenario() {
     return <div>Scenario not found.</div>;
   }
 
-  return <ScenarioPage scenario={scenario} />;
+
+return <ScenarioPage key={scenario.id} scenario={scenario} />;
 }
 
 export default function App() {
