@@ -1,0 +1,35 @@
+
+{
+  "type": "curiosity_baiting",
+  "title": "You Won a Free Gift Card!",
+  "message": "Congratulations!\n\nYou have been selected to receive a $500 gift card!\n\nClick the link below to claim your reward before it expires in 15 minutes.\n\nTo receive your gift card, enter your name, email address, and university login information.\n\nDon't miss out on this exclusive opportunity!",
+  "choices": [
+    {
+      "text": "Share the offer with friends so they can claim their gift cards too.",
+      "safe": false,
+      "feedback": "Sharing an unverified offer could expose your friends to the same scam. Verify the promotion before forwarding it."
+    },
+    {
+      "text": "Click the link and enter your information to claim the gift card.",
+      "safe": false,
+      "feedback": "The attacker is using an attractive reward to encourage you to share personal information. Never provide sensitive information to claim an unverified prize."
+    },
+    {
+      "text": "Research the promotion through the company's official website before providing any information.",
+      "safe": true,
+      "feedback": "Correct! Verifying promotions through official sources helps you avoid fake giveaways and information-stealing websites."
+    }
+  ],
+  "warningSigns": [
+    "Unexpected high-value reward",
+    "Extremely short expiration deadline",
+    "Request for university login credentials",
+    "No verifiable information about the promotion"
+  ],
+  "humanFactors": [
+    "Curiosity",
+    "Greed",
+    "Temptation",
+    "Fear of Missing Out"
+  ]
+}
