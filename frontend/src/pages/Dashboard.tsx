@@ -123,7 +123,7 @@ export default function Dashboard() {
                 if (link === "Dashboard") navigate("/dashboard");
                 if (link === "Training") navigate("/training");
                 //if (link === "Classes") navigate("/classes");
-                //if (link === "Forum") navigate("/forum");
+                if (link === "Forum") navigate("/forum");
                 if (link === "Profile") navigate("/account");
                 if (link === "Progress") navigate("/analytics");
                 //if (link === "Admin") navigate("/admin");
@@ -324,7 +324,10 @@ export default function Dashboard() {
                    } else if (label === "Account & Settings") {
                    navigate("/account");
                         }
-                          }}
+                        else if (label === "Forum") {
+                          navigate("/forum");
+                        }
+                      }}
                         className="border border-white flex gap-2.5 h-[110px] items-center overflow-clip px-3.5 py-[18px] relative rounded-[3px] shrink-0 w-[209px] hover:bg-[rgba(0,255,200,0.05)] transition-colors cursor-pointer text-left"
                         style={{ background: "rgba(7,26,44,0.75)" }}
                       >
