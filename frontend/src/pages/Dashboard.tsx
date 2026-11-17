@@ -41,14 +41,6 @@ const navLinks = [
   "Admin",
 ];
 
-const humanFactorCategories = [
-  { label: "Authority" },
-  { label: "Urgency" },
-  { label: "Familiarity" },
-  { label: "Reciprocity" },
-  { label: "Institutional Trust" },
-];
-
 const explorLinks = [
   [{ label: "Training / Scenario Library" }, { label: "Progress & Analytics" }],
   [{ label: "Classes" }, { label: "Forum" }],
@@ -61,9 +53,9 @@ const explorLinks = [
 export default function Dashboard() {
   const [username, setUsername] = useState<string | null>(null);
   const [progress, setProgress] = useState<ProgressSummary | null>(null);
-const [factors, setFactors] = useState<HumanFactorSummary[]>([]);
-const [analyticsLoading, setAnalyticsLoading] = useState(true);
-const [analyticsError, setAnalyticsError] = useState("");
+  const [factors, setFactors] = useState<HumanFactorSummary[]>([]);
+  const [analyticsLoading, setAnalyticsLoading] = useState(true);
+  const [analyticsError, setAnalyticsError] = useState("");
 
   useEffect(() => {
     async function loadUser() {
@@ -84,57 +76,57 @@ const [analyticsError, setAnalyticsError] = useState("");
     loadUser();
   }, []);
   useEffect(() => {
-  const controller = new AbortController();
+    const controller = new AbortController();
 
-  async function loadAnalytics() {
-    try {
-      const [progressResponse, factorsResponse] = await Promise.all([
-        fetch("/api/analytics/progress", {
-          signal: controller.signal,
-        }),
-        fetch("/api/analytics/human-factors", {
-          signal: controller.signal,
-        }),
-      ]);
+    async function loadAnalytics() {
+      try {
+        const [progressResponse, factorsResponse] = await Promise.all([
+          fetch("/api/analytics/progress", {
+            signal: controller.signal,
+          }),
+          fetch("/api/analytics/human-factors", {
+            signal: controller.signal,
+          }),
+        ]);
 
-      if (!progressResponse.ok || !factorsResponse.ok) {
-        throw new Error("Unable to load analytics.");
-      }
+        if (!progressResponse.ok || !factorsResponse.ok) {
+          throw new Error("Unable to load analytics.");
+        }
 
-      const progressData: ProgressSummary = await progressResponse.json();
-      const factorData: HumanFactorSummary[] = await factorsResponse.json();
+        const progressData: ProgressSummary = await progressResponse.json();
+        const factorData: HumanFactorSummary[] = await factorsResponse.json();
 
-      if (!controller.signal.aborted) {
-        setProgress(progressData);
-        setFactors(factorData);
-      }
-    } catch (error) {
-      if (!controller.signal.aborted) {
-        setAnalyticsError(
-          error instanceof Error ? error.message : "Something went wrong."
-        );
-      }
-    } finally {
-      if (!controller.signal.aborted) {
-        setAnalyticsLoading(false);
+        if (!controller.signal.aborted) {
+          setProgress(progressData);
+          setFactors(factorData);
+        }
+      } catch (error) {
+        if (!controller.signal.aborted) {
+          setAnalyticsError(
+            error instanceof Error ? error.message : "Something went wrong.",
+          );
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setAnalyticsLoading(false);
+        }
       }
     }
-  }
 
-  loadAnalytics();
+    loadAnalytics();
 
-  return () => controller.abort();
-}, []);
-const factorPerformance = factors.map((factor) => ({
-  label: factor.humanFactor
-    .replace(/_/g, " ")
-    .replace(/\b\w/g, (letter) => letter.toUpperCase()),
-  percentage: Math.max(
-    0,
-    Math.min(100, 100 - factor.susceptibilityPercentage)
-  ),
-  attempts: factor.totalAttempts,
-}));
+    return () => controller.abort();
+  }, []);
+  const factorPerformance = factors.map((factor) => ({
+    label: factor.humanFactor
+      .replace(/_/g, " ")
+      .replace(/\b\w/g, (letter) => letter.toUpperCase()),
+    percentage: Math.max(
+      0,
+      Math.min(100, 100 - factor.susceptibilityPercentage),
+    ),
+    attempts: factor.totalAttempts,
+  }));
   const navigate = useNavigate();
 
   const [isLoggingOut, setIsLoggingOut] = useState(false);
@@ -173,15 +165,13 @@ const factorPerformance = factors.map((factor) => ({
       </div>
 
       {/* Top Navigation */}
-      <div 
-className="relative z-10 flex w-full shrink-0 flex-col items-start gap-3 rounded-none border-2 border-white/90 bg-white/15 px-4 py-3 text-white font-semibold backdrop-blur-2xl shadow-[inset_0_0_12px_rgba(255,255,255,0.12),0_0_8px_var(--cyber-accent)] transition-all duration-300 hover:-translate-y-1 hover:bg-white/25 hover:shadow-[0_0_18px_3px_var(--cyber-accent),0_0_35px_var(--cyber-accent)] sm:px-6 xl:min-h-[72px] xl:flex-row xl:items-center xl:justify-between xl:gap-0 xl:px-14 xl:py-0">
+      <div className="relative z-10 flex w-full shrink-0 flex-col items-start gap-3 rounded-none border-2 border-white/90 bg-white/15 px-4 py-3 text-white font-semibold backdrop-blur-2xl shadow-[inset_0_0_12px_rgba(255,255,255,0.12),0_0_8px_var(--cyber-accent)] transition-all duration-300 hover:-translate-y-1 hover:bg-white/25 hover:shadow-[0_0_18px_3px_var(--cyber-accent),0_0_35px_var(--cyber-accent)] sm:px-6 xl:min-h-[72px] xl:flex-row xl:items-center xl:justify-between xl:gap-0 xl:px-14 xl:py-0">
         <button
           type="button"
           onClick={() => navigate("/")}
-          
           aria-label="Return to login"
         >
-          <div/>
+          <div />
           <p className="cyber-display text-base font-bold text-[var(--cyber-accent)] whitespace-nowrap transition-all duration-300 hover:drop-shadow-[0_0_15px_var(--cyber-accent)]">
             CyberSense
           </p>
@@ -199,7 +189,7 @@ className="relative z-10 flex w-full shrink-0 flex-col items-start gap-3 rounded
                 if (link === "Progress") navigate("/analytics");
                 //if (link === "Admin") navigate("/admin");
               }}
-             className="flex shrink-0 cursor-pointer items-center rounded-none border-2 border-[var(--cyber-accent)] bg-[rgba(7,26,44,0.85)] px-4 py-2 font-semibold text-[var(--cyber-accent)] shadow-[0_0_8px_var(--cyber-accent)] transition-all duration-300 hover:-translate-y-1 hover:bg-[rgba(7,26,44,0.65)] hover:shadow-[0_0_20px_3px_var(--cyber-accent),0_0_40px_var(--cyber-accent)]"
+              className="flex shrink-0 cursor-pointer items-center rounded-none border-2 border-[var(--cyber-accent)] bg-[rgba(7,26,44,0.85)] px-4 py-2 font-semibold text-[var(--cyber-accent)] shadow-[0_0_8px_var(--cyber-accent)] transition-all duration-300 hover:-translate-y-1 hover:bg-[rgba(7,26,44,0.65)] hover:shadow-[0_0_20px_3px_var(--cyber-accent),0_0_40px_var(--cyber-accent)]"
             >
               <span className="text-sm whitespace-nowrap">{link}</span>
             </button>
@@ -240,7 +230,7 @@ className="relative z-10 flex w-full shrink-0 flex-col items-start gap-3 rounded
             <p className="font-bold text-[var(--cyber-accent)] text-xs uppercase tracking-wide">
               Dashboard / Learning overview
             </p>
-       <p className="font-bold text-[28px] leading-tight cyber-main-title">
+            <p className="font-bold text-[28px] leading-tight cyber-main-title">
               Welcome back, {username ?? "user"}!
             </p>
             <p className="cyber-body-text">
@@ -248,88 +238,89 @@ className="relative z-10 flex w-full shrink-0 flex-col items-start gap-3 rounded
               respond to social engineering.
             </p>
           </div>
-       
-           <button
-           type="button"
-             onClick={() => navigate("/training")}
-             className="cyber-dashboard-tile flex items-center px-[22px] py-[13px] rounded-[3px] cursor-pointer"
-             >
+
+          <button
+            type="button"
+            onClick={() => navigate("/training")}
+            className="cyber-dashboard-tile flex items-center px-[22px] py-[13px] rounded-[3px] cursor-pointer"
+          >
             <span className="font-bold text-white text-sm whitespace-nowrap">
               Continue Training →
             </span>
-            
           </button>
         </div>
 
         {/* Dashboard Content */}
-       <div className="flex flex-col lg:flex-row flex-1 gap-5 items-stretch w-full min-w-0">
+        <div className="flex flex-col lg:flex-row flex-1 gap-5 items-stretch w-full min-w-0">
           {/* Left Column */}
-        <div className="flex flex-col gap-5 items-stretch w-full min-w-0 lg:flex-1">
+          <div className="flex flex-col gap-5 items-stretch w-full min-w-0 lg:flex-1">
             {/* Progress Summary */}
             <div
               className="border border-white flex flex-col gap-4 items-start overflow-clip p-5 relative rounded-[3px] shrink-0 w-full shadow-[0_0_5px_var(--cyber-accent)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_3px_var(--cyber-accent),0_0_45px_var(--cyber-accent)]"
               style={{ background: "rgba(7,26,44,0.75)" }}
             >
               <div className="flex items-center justify-between w-full text-[var(--cyber-accent)]">
-            
-<p className="font-bold text-xl cyber-section-title">
-  Progress summary
-</p>
+                <p className="font-bold text-xl cyber-section-title">
+                  Progress summary
+                </p>
                 <button
                   onClick={() => navigate("/training")}
-                className="font-semibold text-xs hover:underline cursor-pointer cyber-section-title"
+                  className="font-semibold text-xs hover:underline cursor-pointer cyber-section-title"
                 >
                   View training →
                 </button>
               </div>
               <div className="flex flex-wrap gap-x-8 gap-y-4 items-start w-full min-w-0">
                 <div className="flex flex-col gap-1 items-start shrink-0 w-[132px] text-[var(--cyber-accent)]">
-          <p className="font-bold text-2xl cyber-stat-glow">
-              {progress && progress.totalAttempts > 0
-              ? `${progress.safeResponsePercentage}%`
-                  : "—"}
-         </p>
-       <p className="cyber-body-text">Safe response rate</p>
+                  <p className="font-bold text-2xl cyber-stat-glow">
+                    {progress && progress.totalAttempts > 0
+                      ? `${progress.safeResponsePercentage}%`
+                      : "—"}
+                  </p>
+                  <p className="cyber-body-text">Safe response rate</p>
                 </div>
                 <div className="flex flex-col gap-1 items-start shrink-0 w-[132px] text-[var(--cyber-accent)]">
-                <p className="font-bold text-2xl cyber-stat-glow">
-           {progress && progress.totalAttempts > 0
-            ? `${progress.safeAnswers} / ${progress.totalAttempts}`
-               : "—"}
-            </p>
-          <p className="cyber-body-text">Safe responses / attempts</p>
+                  <p className="font-bold text-2xl cyber-stat-glow">
+                    {progress && progress.totalAttempts > 0
+                      ? `${progress.safeAnswers} / ${progress.totalAttempts}`
+                      : "—"}
+                  </p>
+                  <p className="cyber-body-text">Safe responses / attempts</p>
                 </div>
                 <div className="flex flex-col gap-1 items-start shrink-0 w-[132px] text-[var(--cyber-accent)]">
-                 <p className="font-bold text-2xl cyber-stat-glow">
-             {progress && progress.totalAttempts > 0
-              ? progress.unsafeAnswers
-                          : "—"}
-                        </p>
-              <p className="cyber-body-text">Unsafe responses</p>
+                  <p className="font-bold text-2xl cyber-stat-glow">
+                    {progress && progress.totalAttempts > 0
+                      ? progress.unsafeAnswers
+                      : "—"}
+                  </p>
+                  <p className="cyber-body-text">Unsafe responses</p>
                 </div>
                 <div className="flex flex-1 flex-col gap-1.5 items-start min-w-0">
                   <div className="flex items-center justify-between w-full text-xs cyber-section-title">
                     <span>Safe response rate</span>
-             <span>
-           {progress && progress.totalAttempts > 0
-              ? `${progress.safeAnswers} of ${progress.totalAttempts}`
-              : "—"}
-             </span>
+                    <span>
+                      {progress && progress.totalAttempts > 0
+                        ? `${progress.safeAnswers} of ${progress.totalAttempts}`
+                        : "—"}
+                    </span>
                   </div>
                   <div
                     className="w-full h-3 rounded-sm overflow-hidden"
                     style={{ background: "rgba(7,26,44,0.75)" }}
                   >
                     <div
-                 className="h-3 bg-[var(--cyber-accent)] cyber-neon-bar transition-all duration-500"
-                style={{
-               width: `${
-                  progress && progress.totalAttempts > 0
-               ? Math.max(0, Math.min(100, progress.safeResponsePercentage))
-                   : 0
-                    }%`,
+                      className="h-3 bg-[var(--cyber-accent)] cyber-neon-bar transition-all duration-500"
+                      style={{
+                        width: `${
+                          progress && progress.totalAttempts > 0
+                            ? Math.max(
+                                0,
+                                Math.min(100, progress.safeResponsePercentage),
+                              )
+                            : 0
+                        }%`,
                       }}
-                   />
+                    />
                   </div>
                 </div>
               </div>
@@ -341,32 +332,38 @@ className="relative z-10 flex w-full shrink-0 flex-col items-start gap-3 rounded
               style={{ background: "rgba(7,26,44,0.75)" }}
             >
               <div className="flex items-center justify-between w-full text-[var(--cyber-accent)]">
-            <p className="font-bold text-xl cyber-section-title">
-  Human-factor performance
-</p>
+                <p className="font-bold text-xl cyber-section-title">
+                  Human-factor performance
+                </p>
                 <p className="font-semibold text-xs">
                   Based on recent scenarios
                 </p>
               </div>
+              {analyticsLoading && (
+                <p className="cyber-body-text text-sm">Loading analytics…</p>
+              )}
+              {analyticsError && (
+                <p className="text-sm text-red-400">{analyticsError}</p>
+              )}
 
               {/* No data state */}
               <div className="flex flex-col gap-3.5 w-full">
-              {factorPerformance.map(({ label, percentage }) => (
+                {factorPerformance.map(({ label, percentage }) => (
                   <div
                     key={label}
                     className="flex gap-3.5 items-center min-h-7 w-full py-2"
                   >
-                  <p className="cyber-section-title text-sm leading-relaxed w-[210px] shrink-0">
+                    <p className="cyber-section-title text-sm leading-relaxed w-[210px] shrink-0">
                       {label}
                     </p>
-                 <div className="flex-1 h-2 rounded-full bg-white/20 min-w-0">
+                    <div className="flex-1 h-2 rounded-full bg-white/20 min-w-0">
                       <div
-             className="h-full bg-[var(--cyber-accent)] cyber-neon-bar"
-             style={{ width: `${percentage}%` }}
-                     />
+                        className="h-full bg-[var(--cyber-accent)] cyber-neon-bar"
+                        style={{ width: `${percentage}%` }}
+                      />
                     </div>
                     <p className="font-bold text-[var(--cyber-accent)] text-xs text-right w-[38px] shrink-0">
-                     {Math.round(percentage)}%
+                      {Math.round(percentage)}%
                     </p>
                   </div>
                 ))}
@@ -385,18 +382,16 @@ className="relative z-10 flex w-full shrink-0 flex-col items-start gap-3 rounded
               style={{ background: "rgba(7,26,44,0.75)" }}
             >
               <div className="flex items-center justify-between w-full text-[var(--cyber-accent)]">
-          <p className="font-bold text-xl cyber-section-title">
-  Recent scenarios
-</p>
+                <p className="font-bold text-xl cyber-section-title">
+                  Recent scenarios
+                </p>
                 <button className="font-semibold text-xs hover:underline cursor-pointer cyber-section-title">
                   View all →
                 </button>
               </div>
               {/* Empty state */}
               <div className="flex flex-col items-center justify-center w-full py-8 gap-2">
-                   <p className="cyber-body-text">
-                  No recent scenarios yet
-                </p>
+                <p className="cyber-body-text">No recent scenarios yet</p>
                 <p className="cyber-body-text">
                   Start training to see your scenario history here.
                 </p>
@@ -405,7 +400,7 @@ className="relative z-10 flex w-full shrink-0 flex-col items-start gap-3 rounded
 
             {/* Explore CyberSense */}
             <div className="flex flex-col gap-3 items-start flex-1 w-full">
-             <p className="font-bold text-[var(--cyber-accent)] text-xl whitespace-nowrap cyber-section-title">
+              <p className="font-bold text-[var(--cyber-accent)] text-xl whitespace-nowrap cyber-section-title">
                 Explore CyberSense
               </p>
               <div className="flex flex-col gap-3 flex-1 w-full">
@@ -417,24 +412,22 @@ className="relative z-10 flex w-full shrink-0 flex-col items-start gap-3 rounded
                     {row.map(({ label, badge }) => (
                       <button
                         key={label}
-                      
-            onClick={() => {
-                     if (label === "Training / Scenario Library") {
-                        navigate("/training");
-                       } else if (label === "Progress & Analytics") {
-                        navigate("/analytics");
-                   } else if (label === "Account & Settings") {
-                   navigate("/account");
-                        }
-                        else if (label === "Forum") {
-                          navigate("/forum");
-                        }
-                      }}
+                        onClick={() => {
+                          if (label === "Training / Scenario Library") {
+                            navigate("/training");
+                          } else if (label === "Progress & Analytics") {
+                            navigate("/analytics");
+                          } else if (label === "Account & Settings") {
+                            navigate("/account");
+                          } else if (label === "Forum") {
+                            navigate("/forum");
+                          }
+                        }}
                         className="border border-white flex gap-2.5 h-[110px] items-center overflow-clip px-3.5 py-[18px] relative rounded-[3px] shrink-0 w-[209px] hover:bg-[rgba(0,255,200,0.05)] transition-colors cursor-pointer text-left"
                         style={{ background: "rgba(7,26,44,0.75)" }}
                       >
                         <div className="flex flex-1 flex-col gap-1 items-start min-w-0">
-                       <p className="font-semibold text-white text-base w-full">
+                          <p className="font-semibold text-white text-base w-full">
                             {label}
                           </p>
                         </div>
