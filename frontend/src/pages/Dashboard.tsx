@@ -194,7 +194,7 @@ className="relative z-10 flex w-full shrink-0 flex-col items-start gap-3 rounded
                 if (link === "Dashboard") navigate("/dashboard");
                 if (link === "Training") navigate("/training");
                 //if (link === "Classes") navigate("/classes");
-                //if (link === "Forum") navigate("/forum");
+                if (link === "Forum") navigate("/forum");
                 if (link === "Profile") navigate("/account");
                 if (link === "Progress") navigate("/analytics");
                 //if (link === "Admin") navigate("/admin");
@@ -426,10 +426,12 @@ className="relative z-10 flex w-full shrink-0 flex-col items-start gap-3 rounded
                    } else if (label === "Account & Settings") {
                    navigate("/account");
                         }
-                          }}
-                       
-                   className="cyber-dashboard-tile flex gap-2.5 h-[110px] items-center px-3.5 py-[18px] relative rounded-[3px] shrink-0 w-[209px] cursor-pointer text-left transition-all duration-300 hover:-translate-y-1"
-                        
+                        else if (label === "Forum") {
+                          navigate("/forum");
+                        }
+                      }}
+                        className="border border-white flex gap-2.5 h-[110px] items-center overflow-clip px-3.5 py-[18px] relative rounded-[3px] shrink-0 w-[209px] hover:bg-[rgba(0,255,200,0.05)] transition-colors cursor-pointer text-left"
+                        style={{ background: "rgba(7,26,44,0.75)" }}
                       >
                         <div className="flex flex-1 flex-col gap-1 items-start min-w-0">
                        <p className="font-semibold text-white text-base w-full">

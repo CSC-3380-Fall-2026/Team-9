@@ -1,0 +1,32 @@
+{
+  "type": "family_emergency_scam",
+  "title": "Your Family Member Needs Bail Money!",
+  "scenario": "You receive a phone call from an unfamiliar international number. The caller claims that your cousin has been arrested while traveling in another country. They explain that your cousin is being held in jail and needs $2,500 immediately for bail. The caller says your cousin is scared and cannot contact anyone else. They demand payment through a money transfer service within the next hour and warn you not to tell other family members.",
+  "question": "What should you do?",
+  "answers": [
+    {
+      "text": "Send the money immediately because your family member could be in danger.",
+      "correct": false
+    },
+    {
+      "text": "Ask the caller for your cousin's personal information and send the money if they provide it.",
+      "correct": false
+    },
+    {
+      "text": "Contact your cousin or another trusted family member through a separate, verified communication method before taking action.",
+      "correct": true
+    },
+    {
+      "text": "Send half the requested amount to show that you are willing to help.",
+      "correct": false
+    }
+  ],
+  "explanation": "This is a family emergency impersonation scam. Scammers exploit fear and emotional attachment by pretending a loved one has been arrested or is in danger. They create urgency and discourage victims from verifying the situation. Always independently contact the family member or another trusted person before sending money.",
+  "humanFactors": [
+    "Fear",
+    "Urgency",
+    "Emotional Manipulation",
+    "Authority",
+    "Isolation"
+  ]
+}
