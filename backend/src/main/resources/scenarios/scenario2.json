@@ -1,6 +1,6 @@
  {
  "type": "smishing_sms",
-  "title": "Delivery Attemp Failed: Action Required",
+  "title": "Delivery Attempt Failed: Action Required",
   "message": "From: DeliverySupport@shipping-alert.com\n\nYour package delivery was unsuccessful due to an incomplete shipping address. Your package is currently being held at our facility.\n\nPlease update your delivery information within 12 hours to avoid having your package returned to the sender.\n\nUpdate Delivery Address: [Suspicious Link]\n\nThank you,\nDelivery Support Team",
   "choices": [
     {
