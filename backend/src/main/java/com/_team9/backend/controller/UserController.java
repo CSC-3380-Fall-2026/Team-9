@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/users")
 @CrossOrigin(originPatterns = {
     "http://*:5173",
+    "https://*.netlify.app",
     "http://127.0.0.1:4173"
 })
 public class UserController {
